@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 import io
 import requests
+import responses
 
 d = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
 df = d[7].iloc[:-2]
