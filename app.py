@@ -112,7 +112,9 @@ def index1():
 @app.route('/names')
 def names():
     """Return a list of sample names."""
-    return jsonify(list(final_df.STATE_UT))
+    a = final_df["STATE_UT"]
+    del a[1:3]
+    return jsonify(list(a))
 
 @app.route('/metadata/<state>')
 def sample_metadata(state):
