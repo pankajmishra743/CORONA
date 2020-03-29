@@ -113,7 +113,7 @@ def index1():
 def names():
     """Return a list of sample names."""
     a = final_df["STATE_UT"].tolist()
-    a = a[2:]
+    a = a[3:]
     a.insert(0, "All India")
     return jsonify(a)
 
