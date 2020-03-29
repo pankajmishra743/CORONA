@@ -13,7 +13,7 @@ df.columns = ['SN', 'STATE_UT', 'ACTIVE_CASES', 'DEATHS', 'RECOVERIES', 'TOTAL']
 df1 = df.iloc[:-1]
 df2 = df.tail(1)
 final_df = pd.concat([df2, df1]).reset_index(drop=True)
-final_df['STATE_UT'] = final_df['STATE_UT'].map(lambda x: x.rstrip(' †'))
+final_df['STATE_UT'] = (final_df['STATE_UT'].str.strip(' †'))
 final_df.set_value(0, 'STATE_UT', 'All India') 
 
 dd = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
