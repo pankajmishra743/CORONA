@@ -168,19 +168,26 @@ def country_conf(country):
     q="SELECT Confirmed FROM total_df where Country = '"+country+"';"
     pysqldf = lambda q: sqldf(q, globals())
     sf = pysqldf(q)
+    sf['Confirmed'] = sf['Confirmed'].apply(str)
     return jsonify(list(sf.Confirmed))
     
 @app.route('/<country>/recv')
 def country_recv(country):
     """Return country wise confirm cases list data."""
-    sf = total_df[total_df['Country']==country]
+    q="SELECT Recovered FROM total_df where Country = '"+country+"';"
+    pysqldf = lambda q: sqldf(q, globals())
+    sf = pysqldf(q)
+    sf['Recovered'] = sf['Recovered'].apply(str)
     return jsonify(list(sf.Recovered))
 
 @app.route('/<country>/death')
 def country_death(country):
     """Return country wise confirm cases list data."""
-    sf = total_df[total_df['Country']==country]
-    return jsonify(list(sf.Deaths)) 
+    q="SELECT Deaths FROM total_df where Country = '"+country+"';"
+    pysqldf = lambda q: sqldf(q, globals())
+    sf = pysqldf(q)
+    sf['Deaths'] = sf['Deaths'].apply(str)
+    return jsonify(list(sf.Deaths))
 
 
 @app.route('/statedata/<state>')
