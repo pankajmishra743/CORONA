@@ -206,8 +206,10 @@ def state_data(state):
 @app.route('/total')
 def all_india_data():
     """Return total case."""
-    return jsonify(list(state_df["All India"]))
-
+    z = state_df["All India"]
+    zz = z[2:]
+    return jsonify(list(zz))
+    
 @app.route('/new')
 def all_india_new_cases():
     """Return total new cases."""
