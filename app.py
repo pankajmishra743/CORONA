@@ -29,7 +29,7 @@ ColumnName.append(ColumnName.pop(ColumnName.index('All India')))
 state_df.columns = ColumnName
 # state_df.rename(columns = {'Total':'All India'}, inplace = True)
 # state_df.rename(columns = {'Date (2020)':'Date'}, inplace = True)
-dataframe.to_csv('static/assets/data/india12345.csv') 
+state_df.to_csv('static/assets/data/india12345.csv') 
 
 # for world analysis
 
