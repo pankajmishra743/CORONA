@@ -22,7 +22,6 @@ for column in state_df:
     state_df[column] = state_df[column].str.replace(r"\(.*\)","")
 state_df.fillna(0, inplace=True)
 state_df = state_df.iloc[:, :-4]
-# state_df = state_df.drop(state_df.columns[len(state_df.columns)-1], axis=1)
 ColumnName = final_df['STATE_UT'].tolist()
 ColumnName.append('New')
 ColumnName.append(ColumnName.pop(ColumnName.index('All India')))
