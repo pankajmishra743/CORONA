@@ -216,7 +216,7 @@ def all_india_new_cases():
 @app.route('/check')
 def all_check():
     """Return csv."""
-    return Response(state_df.to_csv())  
+    return responses.Response(state_df.to_csv())  
 
   
 if __name__ == "__main__":
