@@ -11,3 +11,4 @@ SQLAlchemy==1.1.14
 Werkzeug==0.12.2
 pandas==0.20.1
 pandasql==0.7.3
+requests==2.23.0
