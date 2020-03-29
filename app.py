@@ -29,7 +29,6 @@ ColumnName.append(ColumnName.pop(ColumnName.index('All India')))
 state_df.columns = ColumnName
 # state_df.rename(columns = {'Total':'All India'}, inplace = True)
 # state_df.rename(columns = {'Date (2020)':'Date'}, inplace = True)
-state_df.to_csv('static/assets/data/india12345.csv') 
 
 # for world analysis
 
@@ -212,8 +211,13 @@ def all_india_data():
 def all_india_new_cases():
     """Return total new cases."""
     return jsonify(list(state_df.New))  
-  
+ 
+@app.route('/check')
+def all_india_new_cases():
+    """Return csv."""
+    return Response(state_df.to_csv())  
 
+  
 if __name__ == "__main__":
     app.run(debug=True)
    
