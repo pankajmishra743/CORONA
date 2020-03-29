@@ -221,11 +221,11 @@ def all_india_new_cases():
     ll = l[2:]
     return jsonify(list(ll))  
  
-@app.route('/check')
+@app.route('/check/<i>')
 def all_check():
     """Return csv."""
-    first_column = final_df.iloc[:, 0]
-    return jsonify(list(first_column))  
+    column = final_df.iloc[:, i]
+    return jsonify(list(column))  
 
   
 if __name__ == "__main__":
