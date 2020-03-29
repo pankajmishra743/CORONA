@@ -26,9 +26,11 @@ state_df = state_df.iloc[:, :-4]
 # ColumnName.append(ColumnName.pop(ColumnName.index('All India')))
 # ColumnName.insert(0, "Date")
 # state_df.columns = ColumnName
-state_df.columns = state_df.iloc[1]
-state_df = state_df.iloc[2:]
+# state_df.columns = state_df.iloc[1]
+# state_df = state_df.iloc[2:]
+state_df.columns = state_df.columns.droplevel(0)
 state_df.rename(columns = {'Total':'All India'}, inplace = True)
+state_df.rename(columns = {'Date (2020)':'Date'}, inplace = True)
 
 # for world analysis
 
