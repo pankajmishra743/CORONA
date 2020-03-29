@@ -131,7 +131,8 @@ def sample_mdata(state):
 def sample_homedata():
     """Return all dates."""
     x = state_df.iloc[:,0]
-    return jsonify(list(x)) 
+    xx = x[2:]
+    return jsonify(list(xx)) 
 
 @app.route('/wdates')
 def world_data_date():
