@@ -23,9 +23,9 @@ state_df.fillna(0, inplace=True)
 state_df = state_df.iloc[:, :-4]
 
 ColumnName = final_df['STATE_UT'].tolist()
-ColumnName.append('New')
+#ColumnName.append('New')
 ColumnName.append(ColumnName.pop(ColumnName.index('All India')))
-ColumnName.insert(0, "Date")
+#ColumnName.insert(0, "Date")
 state_df.columns = ColumnName
 # state_df.rename(columns = {'Total':'All India'}, inplace = True)
 # state_df.rename(columns = {'Date (2020)':'Date'}, inplace = True)
