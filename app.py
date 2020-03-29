@@ -198,8 +198,10 @@ def country_death(country):
 @app.route('/statedata/<state>')
 def state_data(state):
     """Return state related data."""
-    return jsonify(list(state_df[state]))
- 
+    y = state_df[state]
+    yy = x[2:]
+    return jsonify(list(yy)) 
+     
 @app.route('/total')
 def all_india_data():
     """Return total case."""
