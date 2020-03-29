@@ -1,0 +1,7 @@
+Country,TotalCases,NewCases,TotalDeaths,NewDeaths,TotalRecovered,ActiveCases,"Serious,Critical",Tot Cases/1M pop,Deaths/1M pop,1stcase,Abbr
+India,887,160,20,0,73,794,0,0.6,0.01,29-Jan,IN
+USA,104126,18691,1696,401,2522,99908,2463,315,5,20-Jan,US
+China,81340,55,3292,5,74588,3460,1034,57,2,10-Jan,CH
+Japan,1499,112,49,2,372,1078,56,12,0.4,14-Jan,JP
+Italy,86498,5909,9134,919,10950,66414,3732,1431,151,29-Jan,IT
+Taiwan,267,15,2,0,30,235,0,11,0.08,20-Jan,TW

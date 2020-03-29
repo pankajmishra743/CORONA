@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>COVID XIX</title>
+    <!-- Latest compiled and minified CSS & JS -->
+    <link rel="stylesheet" media="screen" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+
+    
+        <div class="container">
+                <div class="row">
+                        
+						    <div class="col-md-12" style="background-color: rgba(3, 90, 100, 0.411)">
+								<h2 class="col-md-5">Covid XIX: Stats, Effects in India</h2>
+								<p class="col-md-3" align="Center">
+									<a class="btn btn-primary btn-lg" style="background-color: rgba(3, 90, 100, 0.411)" href="/INvsWL" role="button">India Vs World</a>
+								</p>
+								<h4 class="col-md-4">SELECT :<select id="selDataset" onchange="optionChanged(this.value)"></select></h4>
+							</div>
+							
+							<div class="row">
+							    <div class="col-md-3">	
+									<div class="panel panel-primary">
+										<div class="panel-heading">
+											<h3 class="panel-title">Statistics</h3>
+										</div>
+										<div id="year-metadata" class="panel-body"></div>
+									</div>
+									<div id="ChartContainer1">
+					                    <canvas id="barChart1" width="400" height="500"></canvas>
+                                    </div>
+								</div>
+                                	
+                                <div id="ChartContainer" class="col-md-9">
+									<canvas id="barChart" width="1300" height="800"></canvas>
+                                </div>							
+							</div>
+
+						
+						
+                </div>
+                
+            </div>
+    
+        
+    <script src="../static/index.js" type="text/javascript"></script>
+	<script src="../static/index1.js" type="text/javascript"></script>
+	<script src="../static/index2.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>COVID XIX - India Vs World</title>
+    <!-- Latest compiled and minified CSS & JS -->
+    <link rel="stylesheet" media="screen" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    
+	<link rel="stylesheet" href="../static/assets/css/style.css">
+    <link rel="stylesheet" href="../static/assets/css/d3Style.css">
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+
+    
+        <div class="container">
+                <div class="row">
+                        
+						    <div class="col-md-12" style="background-color: rgba(128,128,0,0.6)">
+								<h2 class="col-md-5">COVID XIX - India Vs World</h2>
+								<p class="col-md-3" align="Center">
+									<a class="btn btn-primary btn-lg" style="background-color: rgba(128,128,0,0.6)" href="/" role="button">India</a>
+								</p>
+								<h4 class="col-md-4">SELECT :<select id="wselDataset" onchange="myoptionChanged(this.value)"></select></h4>
+							</div>
+							
+							<div class="row">
+							    <div class="col-md-3">	
+									<div class="panel panel-primary">
+										<div class="panel-heading" style="background-color: rgba(128,128,0,0.6)">
+											<h3 class="panel-title">Statistics</h3>
+										</div>
+										<div id="country-metadata" class="panel-body"></div>
+									</div>
+									
+								</div>
+                                <div id="myChartContainer" class="col-md-9">
+									<canvas id="lineChart" width="1300" height="650"></canvas>
+                                </div>	
+                                						
+							</div>
+							<div class="col-md-12" style="background-color: rgba(128,58,90,0.6)">
+								<h4 align="Center">India and Other Victim Nations</h4>
+							</div>	
+							<div id="scatter" class="col-md-6">
+					                
+                            </div>
+						
+						
+                </div>
+                <div class="row">
+				    
+					
+                </div>
+				
+				
+				
+            </div>
+    
+        
+    <script src="../static/index3.js" type="text/javascript"></script>
+    <script src="../static/index4.js" type="text/javascript"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+  <script type="text/javascript" src="../static/assets/js/app.js"></script>
+  <script type="text/javascript" src="../static/assets/js/app1.js"></script>
+  
+</body>
+</html>
