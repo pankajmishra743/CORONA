@@ -13,3 +13,4 @@ pandas==0.20.1
 pandasql==0.7.3
 requests==2.23.0
 lxml==4.5.0
+html5lib==1.0.1
