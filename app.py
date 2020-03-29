@@ -224,14 +224,38 @@ def all_india_new_cases():
 @app.route('/check')
 def all_check():
     """Return csv."""
-    column = final_df.iloc[:,2]
+    column = final_df.iloc[:,0]
     return jsonify(list(column))
   
-@app.route('/checks')
-def all_checks():
+@app.route('/check1')
+def all_check1():
     """Return csv."""
-    column1= final_df.iloc[:,3]
-    return jsonify(list(column1))  
+    column1= final_df.iloc[:,1]
+    return jsonify(list(column1))
+  
+@app.route('/check2')
+def all_check2():
+    """Return csv."""
+    column2 = final_df.iloc[:,2]
+    return jsonify(list(column2))
+  
+@app.route('/checks3')
+def all_checks3():
+    """Return csv."""
+    column3= final_df.iloc[:,3]
+    return jsonify(list(column3))
+  
+@app.route('/check4')
+def all_check4():
+    """Return csv."""
+    column4 = final_df.iloc[:,4]
+    return jsonify(list(column4))
+  
+@app.route('/checks5')
+def all_checks5():
+    """Return csv."""
+    column5= final_df.iloc[:,5]
+    return jsonify(list(column5))
 
   
 if __name__ == "__main__":
