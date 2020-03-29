@@ -79,7 +79,7 @@ cf_South_Korea = c_df.loc[(c_df['Country'] == 'Korea, South')]
 cf_Italy = c_df.loc[(c_df['Country'] == 'Italy')]
 cf_Taiwan = c_df.loc[(c_df['Country'] == 'Taiwan*')]
 frame = [cf_India, cf_US, cf_Japan, cf_Italy, cf_China, cf_Taiwan, cf_South_Korea]
-total_df = pd.concat(frame, axis=0, sort=False)
+total_df = pd.concat(frame, axis=0)
 total_df.reset_index(inplace=True)
 columns = ['index', 'Province/State', 'Lat', 'Long']
 total_df.drop(columns, inplace=True, axis=1)
