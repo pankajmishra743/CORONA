@@ -29,6 +29,7 @@ ColumnName.append(ColumnName.pop(ColumnName.index('All India')))
 state_df.columns = ColumnName
 # state_df.rename(columns = {'Total':'All India'}, inplace = True)
 # state_df.rename(columns = {'Date (2020)':'Date'}, inplace = True)
+dataframe.to_csv('static/assets/data/india12345.csv') 
 
 # for world analysis
 
@@ -199,7 +200,7 @@ def country_death(country):
 def state_data(state):
     """Return state related data."""
     y = state_df[state]
-    yy = x[2:]
+    yy = y[2:]
     return jsonify(list(yy)) 
      
 @app.route('/total')
