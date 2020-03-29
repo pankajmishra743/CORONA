@@ -22,9 +22,9 @@ state_df = state_df.replace(to_replace ='\(.*\)', value = '', regex = True)
 state_df.fillna(0, inplace=True)
 state_df = state_df.iloc[:, :-4]
 ColumnName = final_df['STATE_UT'].tolist()
-ColumnName.append('New')
+#ColumnName.append('New')
 ColumnName.append(ColumnName.pop(ColumnName.index('All India')))
-ColumnName.insert(0, "Date")
+#ColumnName.insert(0, "Date")
 state_df.columns = ColumnName
 
 # for world analysis
@@ -165,7 +165,9 @@ def world_country_metadata(country):
 @app.route('/<country>/conf')
 def country_conf(country):
     """Return country wise confirm cases list data."""
-    sf = total_df[total_df['Country']==country]
+    q="SELECT Confirmed FROM total_df where Country = '"+country+"';"
+    pysqldf = lambda q: sqldf(q, globals())
+    sf = pysqldf(q)
     return jsonify(list(sf.Confirmed))
     
 @app.route('/<country>/recv')
