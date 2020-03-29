@@ -46,7 +46,7 @@ dataframe = pd.concat(frames)
 dataframe.fillna(0, inplace=True)
 dataframe.reset_index(inplace=True)
 dataframe['NewCases'] = dataframe['NewCases'].str.replace(',', '').astype(int)
-dataframe['NewDeaths'] = (dataframe['NewDeaths'].str.strip('+').astype(float))
+#dataframe['NewDeaths'] = (dataframe['NewDeaths'].str.strip('+').astype(float))
 del dataframe["index"]
 dataframe.replace(to_replace ="S. Korea", value ="South Korea", inplace=True)
 Abbr = ['IN', 'US', 'CH', 'JP', 'SK','IT', 'TW']
