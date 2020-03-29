@@ -224,7 +224,7 @@ def all_india_new_cases():
 @app.route('/check')
 def all_check():
     """Return csv."""
-    column = final_df.iloc[:, 1]
+    column = final_df.iloc[:1]
     return jsonify(list(column))  
 
   
