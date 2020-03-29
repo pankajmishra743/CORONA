@@ -213,7 +213,9 @@ def all_india_data():
 @app.route('/new')
 def all_india_new_cases():
     """Return total new cases."""
-    return jsonify(list(state_df.New))  
+    l = state_df.iloc[:,1]
+    ll = l[2:]
+    return jsonify(list(ll))  
  
 @app.route('/check')
 def all_check():
