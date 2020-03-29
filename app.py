@@ -213,7 +213,7 @@ def all_india_new_cases():
     return jsonify(list(state_df.New))  
  
 @app.route('/check')
-def all_india_new_cases():
+def all_check():
     """Return csv."""
     return Response(state_df.to_csv())  
 
