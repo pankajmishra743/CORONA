@@ -15,19 +15,7 @@ df1 = df.iloc[:-1]
 df2 = df.tail(1)
 final_df = pd.concat([df2, df1]).reset_index(drop=True)
 final_df['STATE_UT'] = (final_df['STATE_UT'].str.strip(' †'))
-final_df.set_value(0, 'STATE_UT', 'All India') 
-
-r = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
-cf = r[7].iloc[:-2]
-cf.columns = ['SN', 'STATE_UT', 'ACTIVE_CASES', 'DEATHS', 'RECOVERIES', 'TOTAL'] 
-cf1 = cf.iloc[:-1]
-cf2 = cf.tail(1)
-final_df1 = pd.concat([cf2, cf1]).reset_index(drop=True)
-final_df1['STATE_UT'] = (final_df1['STATE_UT'].str.strip(' †'))
-final_df1.set_value(0, 'STATE_UT', 'All India')
-
-
-
+#final_df.set_value(0, 'STATE_UT', 'All India') 
 
 dd = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
 state_df = dd[6].iloc[:-4]
@@ -236,7 +224,7 @@ def all_india_new_cases():
 @app.route('/check')
 def all_check():
     """Return csv."""
-    return jsonify(list(cf2))  
+    return jsonify(list(final_df.columns.values))  
 
   
 if __name__ == "__main__":
