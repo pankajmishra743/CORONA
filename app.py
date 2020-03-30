@@ -150,7 +150,17 @@ def sample_metadata(state):
 @app.route('/mdata/<state>')
 def sample_mdata(state):
     """Return the MetaData for a given State."""
-    return jsonify(list(meta_df[state]))    
+    final_list = list()
+    a = meta_df[state].to_list()
+    if(state == "All India"):
+      final_list[3] = a[2]
+      final_list[2] = a[1]
+      final_list[1] = a[0]
+      q = final_list[1] + final_list[2]
+      final_list[0] = final_list[3] - q
+    else:
+      final_list = a
+    return jsonify(final_list)    
     
 @app.route('/dates')
 def sample_homedata():
