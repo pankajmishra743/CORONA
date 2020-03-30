@@ -50,7 +50,7 @@ frames = [df_India, df_US, df_China, df_Japan, df_South_Korea, df_Italy, df_Taiw
 dataframe = pd.concat(frames)
 dataframe.fillna(0, inplace=True)
 dataframe.reset_index(inplace=True)
-dataframe['NewCases'] = dataframe['NewCases'].str.replace(',', '').astype(int)
+#dataframe['NewCases'] = dataframe['NewCases'].str.replace(',', '').astype(int)
 #dataframe['NewDeaths'] = (dataframe['NewDeaths'].str.strip('+').astype(float))
 del dataframe["index"]
 dataframe.replace(to_replace ="S. Korea", value ="South Korea", inplace=True)
