@@ -150,7 +150,7 @@ def sample_metadata(state):
 @app.route('/mdata/<state>')
 def sample_mdata(state):
     """Return the MetaData for a given State."""
-    final_list = list()
+    final_list = [None] * 4
     a = meta_df[state]
     if(state == "All India"):
       final_list[3] = a[2]
