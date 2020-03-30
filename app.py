@@ -164,7 +164,10 @@ def sample_mdata(state):
       d = c-p
       final_list[0] = str(d)
     else:
-      final_list = a
+      final_list[0] = a[0]
+      final_list[1] = a[1]
+      final_list[2] = a[2]
+      final_list[3] = a[3]
     return jsonify(final_list)    
     
 @app.route('/dates')
