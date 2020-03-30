@@ -16,6 +16,8 @@ final_df = pd.concat([df2, df1]).reset_index(drop=True)
 final_df.columns = ['SN', 'STATE_UT', 'ACTIVE_CASES', 'DEATHS', 'RECOVERIES', 'TOTAL'] 
 final_df['STATE_UT'] = (final_df['STATE_UT'].str.strip(' †'))
 final_df.set_value(0, 'STATE_UT', 'All India')
+final_df[['DEATHS', 'RECOVERIES', 'TOTAL']] = final_df[['DEATHS', 'RECOVERIES', 'TOTAL']].apply(pd.to_numeric)
+final_df['ACTIVE'] = final_df['TOTAL']-(final_df['RECOVERIES'] + final_df['DEATHS'])
 
 dd = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
 state_df = dd[6].iloc[:-4]
@@ -121,7 +123,7 @@ def names():
 def sample_metadata(state):
     """Return the MetaData for a given State."""
     state_metadata = {}
-    state_metadata['Active Cases'] = final_df[final_df['STATE_UT']==state]['ACTIVE_CASES'].to_string(index=False)
+    state_metadata['Active Cases'] = final_df[final_df['STATE_UT']==state]['ACTIVE'].to_string(index=False)
     state_metadata['Recoveries'] = final_df[final_df['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
     state_metadata['Deaths'] = final_df[final_df['STATE_UT']==state]['DEATHS'].to_string(index=False)
     state_metadata['TOTAL'] = final_df[final_df['STATE_UT']==state]['TOTAL'].to_string(index=False)
