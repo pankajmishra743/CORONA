@@ -127,9 +127,9 @@ def sample_metadata(state):
     d = c-(b + a)
     state_metadata = {}
     state_metadata['Active Cases'] = d.to_string(index=False)
-    state_metadata['Recoveries'] = ldf[ldf['STATE_UT']==state]['RECOVERY'].to_string(index=False)
-    state_metadata['Deaths'] = ldf[ldf['STATE_UT']==state]['DEATH'].to_string(index=False)
-    state_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['SUM'].to_string(index=False)
+    state_metadata['Recoveries'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
+    state_metadata['Deaths'] = ldf[ldf['STATE_UT']==state]['DEATHS'].to_string(index=False)
+    state_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['TOTAL'].to_string(index=False)
     return jsonify(state_metadata)
     
 @app.route('/mdata/<state>')
