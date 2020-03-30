@@ -156,8 +156,13 @@ def sample_mdata(state):
       final_list[3] = a[2]
       final_list[2] = a[1]
       final_list[1] = a[0]
-      q = final_list[1] + final_list[2]
-      final_list[0] = final_list[3] - q
+      
+      a = pd.to_numeric(final_list[1], errors='coerce').astype(int)
+      b = pd.to_numeric(final_list[2], errors='coerce').astype(int)
+      c = pd.to_numeric(final_list[3], errors='coerce').astype(int)
+      p = a+b
+      d = c-p
+      final_list[0] = str(d)
     else:
       final_list = a
     return jsonify(final_list)    
