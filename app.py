@@ -121,18 +121,31 @@ def names():
 def sample_metadata(state):
     """Return the MetaData for a given State."""
     ldf = final_df
+    final = {}
     
     state_metadata = {}
+    state_metadata['Active Cases'] = ldf[ldf['STATE_UT']==state]['ACTIVE_CASES'].to_string(index=False)
     state_metadata['Recoveries'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
     state_metadata['Deaths'] = ldf[ldf['STATE_UT']==state]['DEATHS'].to_string(index=False)
     state_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['TOTAL'].to_string(index=False)
-    a = pd.to_numeric(state_metadata['Deaths'], errors='coerce').astype(int)
-    b = pd.to_numeric(state_metadata['Recoveries'], errors='coerce').astype(int)
-    c = pd.to_numeric(state_metadata['TOTAL'], errors='coerce').astype(int)
+        
+    AllIndia_metadata = {}
+    AllIndia_metadata['Deaths'] = ldf[ldf['STATE_UT']==state]['ACTIVE_CASES'].to_string(index=False)
+    AllIndia_metadata['Recoveries'] = ldf[ldf['STATE_UT']==state]['DEATHS'].to_string(index=False)
+    AllIndia_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
+    a = pd.to_numeric(AllIndia_metadata['Deaths'], errors='coerce').astype(int)
+    b = pd.to_numeric(AllIndia_metadata['Recoveries'], errors='coerce').astype(int)
+    c = pd.to_numeric(AllIndia_metadata['TOTAL'], errors='coerce').astype(int)
     p = a+b
     d = c-p
-    state_metadata['Active Cases'] = str(d)
-    return jsonify(state_metadata)
+    AllIndia_metadata['Active Cases'] = str(d)
+    
+    if(state == "All India"):
+      final = AllIndia_metadata
+    else:
+      final = state_metadata
+      
+    return jsonify(final)
     
 @app.route('/mdata/<state>')
 def sample_mdata(state):
