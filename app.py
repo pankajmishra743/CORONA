@@ -131,7 +131,7 @@ def sample_metadata(state):
     c = pd.to_numeric(state_metadata['TOTAL'], errors='coerce').astype(int)
     p = a+b
     d = c-p
-    state_metadata['Active Cases'] = d
+    state_metadata['Active Cases'] = str(d)
     return jsonify(state_metadata)
     
 @app.route('/mdata/<state>')
