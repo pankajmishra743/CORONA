@@ -121,10 +121,10 @@ def names():
 def sample_metadata(state):
     """Return the MetaData for a given State."""
     ldf = final_df
-    ldf['DEATH'] = pd.to_numeric(df.DEATHS.astype(str).str.replace(',',''), errors='coerce').fillna(0).astype(int)
-    ldf['RECOVERY'] = pd.to_numeric(df.RECOVERIES.astype(str).str.replace(',',''), errors='coerce').fillna(0).astype(int)
-    ldf['SUM'] = pd.to_numeric(df.TOTAL.astype(str).str.replace(',',''), errors='coerce').fillna(0).astype(int)
-    ldf['ACTIVE'] = ldf['TOTAL']-(ldf['RECOVERIES'] + ldf['DEATHS'])
+    ldf['DEATH'] = pd.to_numeric(ldf.DEATHS.astype(str).str.replace(',',''), errors='coerce').fillna(0).astype(int)
+    ldf['RECOVERY'] = pd.to_numeric(ldf.RECOVERIES.astype(str).str.replace(',',''), errors='coerce').fillna(0).astype(int)
+    ldf['SUM'] = pd.to_numeric(ldf.TOTAL.astype(str).str.replace(',',''), errors='coerce').fillna(0).astype(int)
+    ldf['ACTIVE'] = ldf['SUM']-(ldf['RECOVERY'] + ldf['DEATH'])
     state_metadata = {}
     state_metadata['Active Cases'] = ldf[ldf['STATE_UT']==state]['ACTIVE'].to_string(index=False)
     state_metadata['Recoveries'] = ldf[ldf['STATE_UT']==state]['RECOVERY'].to_string(index=False)
