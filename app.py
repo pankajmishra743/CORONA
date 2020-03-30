@@ -121,14 +121,15 @@ def names():
 def sample_metadata(state):
     """Return the MetaData for a given State."""
     ldf = final_df
-    ldf[['DEATHS', 'RECOVERIES', 'TOTAL']] = ldf[['DEATHS', 'RECOVERIES', 'TOTAL']].apply(pd.to_numeric)
+    ldf['DEATH'] = pd.to_numeric(df.DEATHS.astype(str).str.replace(',',''), errors='coerce').fillna(0).astype(int)
+    ldf['RECOVERY'] = pd.to_numeric(df.RECOVERIES.astype(str).str.replace(',',''), errors='coerce').fillna(0).astype(int)
+    ldf['SUM'] = pd.to_numeric(df.TOTAL.astype(str).str.replace(',',''), errors='coerce').fillna(0).astype(int)
     ldf['ACTIVE'] = ldf['TOTAL']-(ldf['RECOVERIES'] + ldf['DEATHS'])
-
     state_metadata = {}
     state_metadata['Active Cases'] = ldf[ldf['STATE_UT']==state]['ACTIVE'].to_string(index=False)
-    state_metadata['Recoveries'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
-    state_metadata['Deaths'] = ldf[ldf['STATE_UT']==state]['DEATHS'].to_string(index=False)
-    state_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['TOTAL'].to_string(index=False)
+    state_metadata['Recoveries'] = ldf[ldf['STATE_UT']==state]['RECOVERY'].to_string(index=False)
+    state_metadata['Deaths'] = ldf[ldf['STATE_UT']==state]['DEATH'].to_string(index=False)
+    state_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['SUM'].to_string(index=False)
     return jsonify(state_metadata)
     
 @app.route('/mdata/<state>')
