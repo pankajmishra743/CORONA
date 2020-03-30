@@ -151,7 +151,7 @@ def sample_metadata(state):
 def sample_mdata(state):
     """Return the MetaData for a given State."""
     final_list = list()
-    a = meta_df[state].to_list()
+    a = meta_df[state]
     if(state == "All India"):
       final_list[3] = a[2]
       final_list[2] = a[1]
