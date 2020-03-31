@@ -59,8 +59,7 @@ var chartOptions = {
                 display:false
             },
 	  ticks:{
-              beginAtZero:true,
-			  stepSize: 10000
+              beginAtZero:true
 	  }
     }
 	    //, {
