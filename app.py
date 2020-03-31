@@ -16,6 +16,7 @@ final_df = pd.concat([df2, df1]).reset_index(drop=True)
 final_df.columns = ['SN', 'STATE_UT', 'ACTIVE_CASES', 'DEATHS', 'RECOVERIES', 'TOTAL'] 
 final_df['STATE_UT'] = (final_df['STATE_UT'].str.strip(' †'))
 final_df.set_value(0, 'STATE_UT', 'All India')
+final_df.replace(to_replace ="#",value ="",inplace=True) 
 
 dd = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
 state_df = dd[6].iloc[:-4]
@@ -135,7 +136,7 @@ def sample_metadata(state):
     AllIndia_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
     a = pd.to_numeric(AllIndia_metadata['Deaths'], errors='coerce').astype(int)
     b = pd.to_numeric(AllIndia_metadata['Recoveries'], errors='coerce').astype(int)
-    c = pd.to_numeric(AllIndia_metadata['TOTAL'].replace('#', '',inplace=True), errors='coerce').astype(int)
+    c = pd.to_numeric(AllIndia_metadata['TOTAL'], errors='coerce').astype(int)
     p = a+b
     d = c-p
     AllIndia_metadata['Active Cases'] = str(d)
