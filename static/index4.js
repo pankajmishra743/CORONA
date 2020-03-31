@@ -43,6 +43,9 @@ var chartOptions = {
   scales: {
     xAxes: [{
       barPercentage: 1,
+	    gridLines: {
+                display:false
+            },
       categoryPercentage: .5,
 	  ticks:{
         display: true,
@@ -52,6 +55,9 @@ var chartOptions = {
 	}],
     yAxes: [{
       id: "y-axis-home",
+	    gridLines: {
+                display:false
+            },
 	  ticks:{
               beginAtZero:true,
 			  stepSize: 10000
