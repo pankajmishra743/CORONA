@@ -9,7 +9,7 @@ Chart.defaults.global.defaultFontSize = 14;
 var stateData = {
   label: state,
   data: Data,
-  backgroundColor: 'rgba(128, 0, 0, 1)',
+  backgroundColor: ["yellow", "red", "green", "blue"],
   borderWidth: 0,
   yAxisID: "y-axis-home"
 };
