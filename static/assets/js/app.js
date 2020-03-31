@@ -43,7 +43,7 @@ xText.append("text")
     .attr("data-name", "Total_Deaths")
     .attr("data-axis", "x")
     .attr("class","aText inactive x")
-    .text("Total Death");
+    .text("Total Deaths");
 
 // y-axis 
 svg.append("g").attr("class", "yText");
