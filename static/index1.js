@@ -1,4 +1,4 @@
-function barGraph(dates,sData,aData,nData,state) {
+function barGraph(dates,sData,aData,nData,state,day) {
 	$('#barChart').remove(); // this is my <canvas> element
   $('#ChartContainer').append('<canvas id="barChart" width="1300" height="800"></canvas>');
 var densityCanvas = document.getElementById("barChart");
@@ -6,8 +6,13 @@ var densityCanvas = document.getElementById("barChart");
 Chart.defaults.global.defaultFontFamily = "Lato";
 Chart.defaults.global.defaultFontSize = 14;
 
+var selected_Label;
+if(day != "All Days")
+	selected_Label = state + ' Cases in ' + day + ' Days';
+else
+	selected_Label = state;
 var stateData = {
-  label: state + ' Cases',
+  label: selected_Label,
   data: sData,
   backgroundColor: 'rgba(230, 0, 0, 1)',
   borderWidth: 0,
