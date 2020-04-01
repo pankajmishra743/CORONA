@@ -36,7 +36,7 @@ function mygetData(country, day) {
 						recvData = recvData.slice(recvData.length - day, recvData.length);
 						deathData = deathData.slice(deathData.length - day, deathData.length);
 					}
-					Graph(AllDates, confData, recvData, deathData);	
+					Graph(AllDates, confData, recvData, deathData, day, country);	
 				});
 			});
 		});
