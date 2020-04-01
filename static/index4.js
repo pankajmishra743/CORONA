@@ -43,19 +43,17 @@ var chartOptions = {
   scales: {
     xAxes: [{
       barPercentage: 1,
-	    gridLines: {
+      categoryPercentage: .5,
+	  gridLines: {
                 display:false
             },
-      categoryPercentage: .5,
 	  ticks:{
-        display: true,
-        autoSkip: true,
-        maxTicksLimit: dates.length/10
+        beginAtZero:true
     }
 	}],
     yAxes: [{
       id: "y-axis-home",
-	    gridLines: {
+	  gridLines: {
                 display:false
             },
 	  ticks:{
@@ -72,9 +70,12 @@ var chartOptions = {
   }
 };
 
+
+   
 var barChart = new Chart(densityCanvas, {
   type: 'line',
   data: chartData,
-  options: chartOptions
+  options: chartOptions,
+  
 });
 }
