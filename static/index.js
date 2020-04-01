@@ -13,7 +13,7 @@ function updateMetaData(data) {
     }
 }
   
-function getData(state) {
+function getData(state, day) {
     var dates;
     // Use a request to grab the json data needed for all charts
     Plotly.d3.json(`/metadata/${state}`, function(error, metaData) {
@@ -30,6 +30,12 @@ function getData(state) {
 				if (error) return console.warn(error);
 					Plotly.d3.json(`/new`, function(error, newTotal) {
 					if (error) return console.warn(error);
+					if(day != "All Days"){
+					    AllDates = AllDates.slice(AllDates.length - day, AllDates.length);
+						stateData = stateData.slice(stateData.length - day, stateData.length);
+						allData = allData.slice(allData.length - day, allData.length);
+						newTotal = newTotal.slice(newTotal.length - day, newTotal.length);
+					}
 					barGraph(AllDates, stateData, allData, newTotal, state);	
 				});
 			});
@@ -55,12 +61,19 @@ function getOptions() {
             currentOption.value = stateList[i]
             selDataset.appendChild(currentOption);
         }
-        getData(stateList[0]);
+        getData(stateList[0], "All Days");
     })
 }
 function optionChanged(year) {
     // Fetch new data each time a new sample is selected
-    getData(year);
+	document.getElementById("selDated").selectedIndex = 0;
+    getData(year, "All Days");
+}
+function dateChanged(day, coun) {
+    // Fetch new data each time a new sample is selected
+	var x = document.getElementById('selDated');
+	var days = x.options[day-1].text;
+    getData(coun, days);
 }
 function init() {
     getOptions();
