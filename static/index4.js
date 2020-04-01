@@ -1,4 +1,4 @@
-function Graph(dates,confData,recvData,deathData) {
+function Graph(dates,confData,recvData,deathData,day,country) {
 	$('#lineChart').remove(); // this is my <canvas> element
   $('#myChartContainer').append('<canvas id="lineChart" width="1300" height="650"></canvas>');
 var densityCanvas = document.getElementById("lineChart");
@@ -6,8 +6,13 @@ var densityCanvas = document.getElementById("lineChart");
 Chart.defaults.global.defaultFontFamily = "Lato";
 Chart.defaults.global.defaultFontSize = 14;
 
+var day_Label;
+if(day != "All Days")
+	day_Label = ' in ' + day + ' Days';
+else
+	day_Label = "";
 var confirmData = {
-  label: 'Total Cases',
+  label: 'Total Cases in ' + country + day_Label,
   data: confData,
   backgroundColor: 'rgba(225, 125, 25, 1)',
   borderWidth: 0,
@@ -16,7 +21,7 @@ var confirmData = {
 };
 
 var recoveryData = {
-  label: 'Total Recoveries',
+  label: 'Total Recoveries in ' + country + day_Label,
   data: recvData,
   backgroundColor: 'rgba(118, 165, 64, 1)',
   borderWidth: 0,
@@ -25,7 +30,7 @@ var recoveryData = {
 };
 
 var deathData = {
-  label: 'Total Deceased',
+  label: 'Total Deceased in ' + country + day_Label,
   data: deathData,
   backgroundColor: 'rgba(230, 0, 0, 1)',
   borderWidth: 0,
