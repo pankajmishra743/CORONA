@@ -26,7 +26,15 @@
 								<h1 class="col-md-8" align="right">COVID XIX: India Vs World</h1>
 								<p class="col-md-4" align="right">
 									<a class="btn btn-primary btn-lg" style="background-color: rgba(128,128,0,0.6)" href="/" role="button">India</a>
-									<h4 align="right"><select id="wselDataset" onchange="myoptionChanged(this.value)"></select></h4>
+									<h5 align="right"><select id="wselDataset" onchange="myoptionChanged(this.value)"></select></h5>
+									<h6 align="right"><select id="selDate" onchange="dayChanged(this.value, wselDataset.value)">
+									  <option value="1">All Days</option>
+									  <option value="2">5</option>
+									  <option value="3">10</option>
+									  <option value="4">15</option>
+									  <option value="5">20</option>
+									  <option value="6">30</option>
+									</select></h6>
 								</p>
 								
 							</div>
@@ -35,7 +43,9 @@
 							    <div class="col-md-3">	
 									<div class="panel panel-primary">
 										<div class="panel-heading" style="background-color: rgba(128,128,0,0.6)">
-											<h3 class="panel-title" align="Center">Statistics</h3>
+											<abbr title="Statistics as per SOURCE">
+											 <h3 class="panel-title" align="Center">Statistics</h3>
+											</abbr>
 										</div>
 										<div id="country-metadata" class="panel-body"></div>
 									</div>
