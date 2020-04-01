@@ -36,7 +36,7 @@ function getData(state, day) {
 						allData = allData.slice(allData.length - day, allData.length);
 						newTotal = newTotal.slice(newTotal.length - day, newTotal.length);
 					}
-					barGraph(AllDates, stateData, allData, newTotal, state);	
+					barGraph(AllDates, stateData, allData, newTotal, state, day);		
 				});
 			});
 		});
