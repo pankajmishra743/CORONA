@@ -42,15 +42,15 @@ var chartData = {
 var chartOptions = {
   scales: {
     xAxes: [{
-      barPercentage: 1,
-	    gridLines: {
+		gridLines: {
                 display:false
             },
+      barPercentage: 1,
       categoryPercentage: 1.0
     }],
     yAxes: [{
       id: "y-axis-home",
-	    gridLines: {
+	  gridLines: {
                 display:false
             },
 	  ticks:{
