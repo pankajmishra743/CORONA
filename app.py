@@ -15,7 +15,7 @@ df2 = df.tail(1)
 final_df = pd.concat([df2, df1]).reset_index(drop=True)
 final_df.columns = ['SN', 'STATE_UT', 'ACTIVE_CASES', 'DEATHS', 'RECOVERIES', 'TOTAL'] 
 final_df['STATE_UT'] = (final_df['STATE_UT'].str.strip(' †'))
-final_df.set_value(0, 'STATE_UT', 'All India')
+final_df.at[0, 'STATE_UT'] = 'All India'
 
 dd = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
 state_df = dd[6].iloc[:-4]
@@ -59,9 +59,9 @@ Abbr = ['IN', 'US', 'CH', 'JP', 'SK','IT', 'TW']
 dataframe['Abbr'] = Abbr
 dataframe.fillna(0, inplace=True)
 dataframe.columns = ['Country', 'Total_Cases', 'New_Cases', 'Total_Deaths','New_Deaths', 'Total_Recovered', 'Active_Cases',
-                     'Serious_Critical','Total_Cases_Per_1_M_PPL', 'Deaths_Per_1_M_PPL', '1st_Case_On','Abbr']
+                     'Serious_Critical','Total_Cases_Per_1_M_PPL', 'Deaths_Per_1_M_PPL', 'Abbr']
 cols = ['Total_Deaths', 'New_Deaths', 'Total_Recovered']
-dataframe[cols] = dataframe[cols].astype(int)                    
+dataframe[cols] = dataframe[cols]                  
 dataframe.to_csv('static/assets/data/file1.csv') 
  
 
@@ -199,7 +199,7 @@ def world_country_metadata(country):
     """Return the MetaData for a given country."""
     country_metadata = {}
     ['Country', 'Total_Cases', 'New_Cases', 'Total_Deaths','New_Deaths', 'Total_Recovered', 'Active_Cases',
-                     'Serious_Critical','Total_Cases_Per_1_M_PPL', 'Deaths_Per_1_M_PPL', '1st_Case_On','Abbr']
+                     'Serious_Critical','Total_Cases_Per_1_M_PPL', 'Deaths_Per_1_M_PPL', 'Abbr']
     country_metadata['Total Cases'] = dataframe[dataframe['Country']==country]['Total_Cases'].to_string(index=False)
     country_metadata['New Cases'] = dataframe[dataframe['Country']==country]['New_Cases'].to_string(index=False)
     country_metadata['Total Deaths'] = dataframe[dataframe['Country']==country]['Total_Deaths'].to_string(index=False)
@@ -208,7 +208,6 @@ def world_country_metadata(country):
     country_metadata['Active Cases'] = dataframe[dataframe['Country']==country]['Active_Cases'].to_string(index=False)
     country_metadata['Total Cases/1M Pop'] = dataframe[dataframe['Country']==country]['Total_Cases_Per_1_M_PPL'].to_string(index=False)
     country_metadata['Deaths/1M Pop'] = dataframe[dataframe['Country']==country]['Deaths_Per_1_M_PPL'].to_string(index=False)
-    country_metadata['1st Case On'] = dataframe[dataframe['Country']==country]['1st_Case_On'].to_string(index=False)
     return jsonify(country_metadata)  
 
 @app.route('/<country>/conf')
