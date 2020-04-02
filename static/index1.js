@@ -8,7 +8,7 @@ Chart.defaults.global.defaultFontSize = 14;
 
 var selected_Label;
 if(day != "All Days")
-	selected_Label = state + ' Cases in ' + day + ' Days';
+	selected_Label = state + ' Cases';
 else
 	selected_Label = state;
 var stateData = {
