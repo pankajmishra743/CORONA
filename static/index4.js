@@ -12,7 +12,7 @@ if(day != "All Days")
 else
 	day_Label = "";
 var confirmData = {
-  label: 'Total Cases in ' + country + day_Label,
+  label: 'Total Cases in ' + country,
   data: confData,
   backgroundColor: 'rgba(225, 125, 25, 1)',
   borderWidth: 0,
@@ -21,7 +21,7 @@ var confirmData = {
 };
 
 var recoveryData = {
-  label: 'Total Recoveries in ' + country + day_Label,
+  label: 'Total Recoveries in ' + country,
   data: recvData,
   backgroundColor: 'rgba(118, 165, 64, 1)',
   borderWidth: 0,
@@ -30,7 +30,7 @@ var recoveryData = {
 };
 
 var deathData = {
-  label: 'Total Deceased in ' + country + day_Label,
+  label: 'Total Deceased in ' + country,
   data: deathData,
   backgroundColor: 'rgba(230, 0, 0, 1)',
   borderWidth: 0,
