@@ -10,6 +10,7 @@ import responses
 
 d = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
 df = pd.DataFrame()
+df.columns = ['SN', 'STATE_UT', 'ACTIVE_CASES', 'DEATHS', 'RECOVERIES', 'TOTAL']
 state_df = pd.DataFrame()
 for i in range(1,10):
     if(d[i].iloc[0][1] == 'Andaman and Nicobar Islands'):
