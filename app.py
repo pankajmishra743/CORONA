@@ -9,11 +9,11 @@ import requests
 import responses
 
 d = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
-    for i in range(1,10):
-        if(d[i].iloc[0][1] == 'Andaman and Nicobar Islands'):
-            df = d[i].iloc[:-2]
-        if(d[i].iloc[0][0] == 'Jan-30'):
-            state_df  = d[i].iloc[:-4]
+for i in range(1,10):
+    if(d[i].iloc[0][1] == 'Andaman and Nicobar Islands'):
+        df = d[i].iloc[:-2]
+    if(d[i].iloc[0][0] == 'Jan-30'):
+        state_df  = d[i].iloc[:-4]
 df1 = df.iloc[:-1]
 df2 = df.tail(1)
 final_df = pd.concat([df2, df1]).reset_index(drop=True)
