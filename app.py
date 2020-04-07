@@ -8,8 +8,8 @@ import io
 import requests
 import responses
 
-df = None
-state_df = None
+df = ""
+state_df = ""
 d = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
 for i in range(1,10):
     if(d[i].iloc[0][1] == 'Andaman and Nicobar Islands'):
