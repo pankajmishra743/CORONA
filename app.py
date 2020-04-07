@@ -95,9 +95,9 @@ for i in range(len(url)):
             parameter_Specific_Dataframe_4_Country.insert(0, 'Country', str(countryList[j])) 
         parameter_Specific_Dataframe_4_Country = parameter_Specific_Dataframe_4_Country.iloc[1:]
         Record.append(parameter_Specific_Dataframe_4_Country) 
-    parameter_Specific_Dataframe = pd.concat(Record, axis=0, sort=False)
+    parameter_Specific_Dataframe = pd.concat(Record, axis=0)
     finalDataframe.append(parameter_Specific_Dataframe)
-total_df = pd.concat(finalDataframe, axis=1, sort=False)
+total_df = pd.concat(finalDataframe, axis=1)
 total_df.reset_index(inplace=True)
 total_df.rename(columns = {'index':'Date'}, inplace = True)
 total_df['Date'] = pd.to_datetime(total_df['Date']) 
