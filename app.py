@@ -11,10 +11,8 @@ import responses
 d = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
 for i in range(1,10):
     if(d[i].iloc[0][0] == '1'):
-        print(i)
         df = d[i].iloc[:-2]
     if(d[i].iloc[0][0] == 'Jan-30'):
-        print(i)
         state_df  = d[i].iloc[:-4]
 
 df1 = df.iloc[:-1]
