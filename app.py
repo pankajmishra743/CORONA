@@ -14,11 +14,11 @@ for i in range(1,10):
         df = d[i].iloc[:-2]
     if(d[i].iloc[0][0] == 'Jan-30'):
         state_df  = d[i].iloc[:-4]
-
+df.columns = ['SN', 'STATE_UT', 'ACTIVE_CASES', 'DEATHS', 'RECOVERIES', 'TOTAL'] 
 df1 = df.iloc[:-1]
 df2 = df.tail(1)
 final_df = pd.concat([df2, df1]).reset_index(drop=True)
-final_df.columns = ['SN', 'STATE_UT', 'ACTIVE_CASES', 'DEATHS', 'RECOVERIES', 'TOTAL'] 
+#final_df.columns = ['SN', 'STATE_UT', 'ACTIVE_CASES', 'DEATHS', 'RECOVERIES', 'TOTAL'] 
 final_df['STATE_UT'] = (final_df['STATE_UT'].str.strip(' †'))
 final_df.at[0, 'STATE_UT'] = 'All India'
 
