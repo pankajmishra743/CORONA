@@ -68,31 +68,40 @@ dataframe.to_csv('static/assets/data/file1.csv')
 
 #for world analysis-2
 
-url = 'https://datahub.io/core/covid-19/r/time-series-19-covid-combined.csv'
-s=requests.get(url).content
-c_df=pd.read_csv(io.StringIO(s.decode('utf-8')))
-c_df.fillna(0, inplace=True)
-c_df.rename(columns = {'Country/Region':'Country'}, inplace = True)
-cf_US = c_df.loc[(c_df['Country'] == 'US')]
-cf_India = c_df.loc[(c_df['Country'] == 'India')]
-
-cf_China = c_df.loc[(c_df['Country'] == 'China')]
-cf_China = cf_China.groupby('Date', as_index=False).sum()
-cf_China.insert(loc=2, column='Country', value=['China' for i in range(cf_China.shape[0])])
-
-cf_Japan = c_df.loc[(c_df['Country'] == 'Japan')]
-cf_South_Korea = c_df.loc[(c_df['Country'] == 'Korea, South')]
-cf_Italy = c_df.loc[(c_df['Country'] == 'Italy')]
-cf_Taiwan = c_df.loc[(c_df['Country'] == 'Taiwan*')]
-frame = [cf_India, cf_US, cf_Japan, cf_Italy, cf_China, cf_Taiwan, cf_South_Korea]
-total_df = pd.concat(frame, axis=0)
+url = [
+       'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv',
+       'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv',
+       'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv'
+      ]
+colName = ['Confirmed', 'Recovered', 'Deaths']
+countryList = ['India', 'China', 'USA', 'Japan', 'South Korea', 'Italy', 'Taiwan']
+finalDataframe = []
+for i in range(len(url)): 
+    s=requests.get(url[i]).content
+    fetched_Dataframe=pd.read_csv(io.StringIO(s.decode('utf-8')))
+    fetched_Dataframe.fillna(0, inplace=True)
+    fetched_Dataframe = fetched_Dataframe.groupby('Country/Region', as_index=False).sum()
+    columns = ['Lat', 'Long']
+    fetched_Dataframe.drop(columns, inplace=True, axis=1)
+    fetched_Dataframe.replace(to_replace ="Korea, South", value ="South Korea", inplace=True) 
+    fetched_Dataframe.replace(to_replace ="Taiwan*", value ="Taiwan", inplace=True)
+    fetched_Dataframe.replace(to_replace ="US", value ="USA", inplace=True)
+    Record = []
+    for j in range(len(countryList)): 
+        parameter_Specific_Dataframe_4_Country = fetched_Dataframe.loc[fetched_Dataframe['Country/Region'] == str(countryList[j])]
+        parameter_Specific_Dataframe_4_Country = parameter_Specific_Dataframe_4_Country.transpose()
+        parameter_Specific_Dataframe_4_Country.columns = [colName[i]]
+        if (i==1):
+            parameter_Specific_Dataframe_4_Country.insert(0, 'Country', str(countryList[j])) 
+        parameter_Specific_Dataframe_4_Country = parameter_Specific_Dataframe_4_Country.iloc[1:]
+        Record.append(parameter_Specific_Dataframe_4_Country) 
+    parameter_Specific_Dataframe = pd.concat(Record, axis=0, sort=False)
+    finalDataframe.append(parameter_Specific_Dataframe)
+total_df = pd.concat(finalDataframe, axis=1, sort=False)
 total_df.reset_index(inplace=True)
-columns = ['index', 'Province/State', 'Lat', 'Long']
-total_df.drop(columns, inplace=True, axis=1)
-
-total_df.replace(to_replace ="Korea, South", value ="South Korea", inplace=True) 
-total_df.replace(to_replace ="Taiwan*", value ="Taiwan", inplace=True)
-total_df.replace(to_replace ="US", value ="USA", inplace=True)
+total_df.rename(columns = {'index':'Date'}, inplace = True)
+total_df['Date'] = pd.to_datetime(total_df['Date']) 
+total_df['Date'] = total_df['Date'].dt.strftime('%d/%m/%Y')
 
 
 meta_df = final_df.transpose()
