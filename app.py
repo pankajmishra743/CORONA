@@ -142,7 +142,7 @@ def sample_metadata(state):
     AllIndia_metadata = {}
     AllIndia_metadata['Deaths'] = ldf[ldf['STATE_UT']==state]['ACTIVE_CASES'].to_string(index=False)
     AllIndia_metadata['Recoveries'] = ldf[ldf['STATE_UT']==state]['DEATHS'].to_string(index=False)
-    AllIndia_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False).replace("#", "")
+    AllIndia_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False).replace("#", "").replace("*", "")
     a = pd.to_numeric(AllIndia_metadata['Deaths'], errors='coerce').astype(int)
     b = pd.to_numeric(AllIndia_metadata['Recoveries'], errors='coerce').astype(int)
     c = pd.to_numeric(AllIndia_metadata['TOTAL'], errors='coerce').astype(int)
