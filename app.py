@@ -10,11 +10,11 @@ import responses
 
 d = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
 for i in range(1,10):
-    if(d[i].iloc[0][1] == "Andaman and Nicobar Islands"):
+    if d[i].iloc[0][1] == "Andaman and Nicobar Islands":
         df = d[i].iloc[:-2]
     else:
         df = ''
-    if(d[i].iloc[0][0] == "Jan-30"):
+    if d[i].iloc[0][0] == "Jan-30":
         state_df  = d[i].iloc[:-4]
     else:
         state_df = ''
