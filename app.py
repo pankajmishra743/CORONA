@@ -18,7 +18,7 @@ final_df['STATE_UT'] = (final_df['STATE_UT'].str.strip(' †'))
 final_df.at[0, 'STATE_UT'] = 'All India'
 
 dd = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
-state_df = dd[6].iloc[:-4]
+state_df = dd[7].iloc[:-4]
 state_df = state_df.replace(to_replace ='\(.*\)', value = '', regex = True) 
 state_df = state_df.replace(to_replace ='\[.*\]', value = '', regex = True)
 state_df.fillna(0, inplace=True)
