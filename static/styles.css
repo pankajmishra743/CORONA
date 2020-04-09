@@ -21,6 +21,13 @@ h1 {
   min-width:1300px;
 } 
 
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 650vh;
+  width: 1300vw;
+}
+	
 .jumbotron {
   background-size: cover;
   background-repeat: no-repeat;
