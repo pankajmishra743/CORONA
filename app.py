@@ -53,14 +53,16 @@ dataframe.fillna(0, inplace=True)
 dataframe.reset_index(inplace=True)
 dataframe['NewCases'] = dataframe['NewCases'].str.replace(',', '')
 dataframe['NewCases'] = (dataframe['NewCases'].str.strip('+').astype(float))
+dataframe['NewDeaths'] = dataframe['NewDeaths'].str.replace(',', '')
+dataframe['NewDeaths'] = (dataframe['NewDeaths'].str.strip('+').astype(float))
 del dataframe["index"]
 dataframe.replace(to_replace ="S. Korea", value ="South Korea", inplace=True)
-
-dataframe.fillna(0, inplace=True)
-dataframe.columns = ['Country', 'Total_Cases', 'New_Cases', 'Total_Deaths','New_Deaths', 'Total_Recovered', 'Active_Cases',
-                     'Serious_Critical','Total_Cases_Per_1_M_PPL', 'Deaths_Per_1_M_PPL', 'Total_Tests', 'Total_Tests_Per_1_M_PPL']
 Abbr = ['IN', 'US', 'CH', 'JP', 'SK','IT', 'TW']
 dataframe['Abbr'] = Abbr
+dataframe.fillna(0, inplace=True)
+dataframe.columns = ['Country', 'Total_Cases', 'New_Cases', 'Total_Deaths','New_Deaths', 'Total_Recovered', 'Active_Cases',
+                     'Serious_Critical','Total_Cases_Per_1_M_PPL', 'Deaths_Per_1_M_PPL', 'Total_Tests', 'Total_Tests_Per_1_M_PPL', 'Abbr']
+
 #cols = ['Total_Deaths', 'New_Deaths', 'Total_Recovered']
 #dataframe[cols] = dataframe[cols]                  
 dataframe.to_csv('static/assets/data/file1.csv') 
