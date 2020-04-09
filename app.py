@@ -16,8 +16,7 @@ final_df = pd.concat([df2, df1]).reset_index(drop=True)
 final_df.columns = ['SN', 'STATE_UT', 'ACTIVE_CASES', 'DEATHS', 'RECOVERIES', 'TOTAL'] 
 final_df['STATE_UT'] = (final_df['STATE_UT'].str.strip(' †'))
 final_df.at[0, 'STATE_UT'] = 'All India'
-final_df.replace(to_replace ="#", value ="", inplace=True)
-final_df.replace(to_replace ="*", value ="", inplace=True)
+
 
 dd = pd.read_html('https://en.wikipedia.org/wiki/Template:2019%E2%80%9320_coronavirus_pandemic_data/India_medical_cases_summary')
 state_df = dd[0].iloc[:-4]
@@ -147,7 +146,7 @@ def sample_metadata(state):
     AllIndia_metadata = {}
     AllIndia_metadata['Deaths'] = ldf[ldf['STATE_UT']==state]['ACTIVE_CASES'].to_string(index=False)
     AllIndia_metadata['Recoveries'] = ldf[ldf['STATE_UT']==state]['DEATHS'].to_string(index=False)
-    AllIndia_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
+    AllIndia_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False).replace("#", "").replace("*", "")
     a = pd.to_numeric(AllIndia_metadata['Deaths'], errors='coerce').astype(int)
     b = pd.to_numeric(AllIndia_metadata['Recoveries'], errors='coerce').astype(int)
     c = pd.to_numeric(AllIndia_metadata['TOTAL'], errors='coerce').astype(int)
@@ -168,7 +167,7 @@ def sample_mdata(state):
     final_list = [None] * 4
     a = meta_df[state]
     if(state == "All India"):
-      final_list[3] = a[2]
+      final_list[3] = a[2].replace("#", "").replace("*", "")
       final_list[2] = a[1]
       final_list[1] = a[0]
       
