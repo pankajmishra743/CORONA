@@ -210,8 +210,7 @@ def world_country_name():
 def world_country_metadata(country):
     """Return the MetaData for a given country."""
     country_metadata = {}
-    ['Country', 'Total_Cases', 'New_Cases', 'Total_Deaths','New_Deaths', 'Total_Recovered', 'Active_Cases',
-                     'Serious_Critical','Total_Cases_Per_1_M_PPL', 'Deaths_Per_1_M_PPL', 'Total_Tests', 'Total_Tests_Per_1_M_PPL', 'Abbr']
+    
     country_metadata['Total Cases'] = dataframe[dataframe['Country']==country]['Total_Cases'].to_string(index=False)
     country_metadata['New Cases'] = dataframe[dataframe['Country']==country]['New_Cases'].to_string(index=False)
     country_metadata['Total Deaths'] = dataframe[dataframe['Country']==country]['Total_Deaths'].to_string(index=False)
