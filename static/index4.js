@@ -4,7 +4,7 @@ function Graph(dates,confData,recvData,deathData,day,country) {
 var densityCanvas = document.getElementById("lineChart");
 
 Chart.defaults.global.defaultFontFamily = "Lato";
-Chart.defaults.global.defaultFontSize = 10;
+Chart.defaults.global.defaultFontSize = 14;
 
 var day_Label;
 if(day != "All Days")
