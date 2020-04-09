@@ -21,7 +21,7 @@ h1 {
   min-width:1300px;
 } 
 
-.chart-container {
+.col-md-9 {
   position: relative;
   margin: auto;
   height: 650vh;
