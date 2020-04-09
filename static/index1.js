@@ -1,6 +1,6 @@
 function barGraph(dates,sData,aData,nData,state,day) {
 	$('#barChart').remove(); // this is my <canvas> element
-  $('#ChartContainer').append('<canvas id="barChart" width="1300" height="800"></canvas>');
+  $('#ChartContainer').append('<canvas id="barChart" width="1300" height="650"></canvas>');
 var densityCanvas = document.getElementById("barChart");
 
 Chart.defaults.global.defaultFontFamily = "Lato";
