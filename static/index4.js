@@ -1,6 +1,6 @@
 function Graph(dates,confData,recvData,deathData,day,country) {
 	$('#lineChart').remove(); // this is my <canvas> element
-  $('#myChartContainer').append('<canvas id="lineChart" width="1300" height="800"></canvas>');
+  $('#myChartContainer').append('<canvas id="lineChart" width="1300" height="650"></canvas>');
 var densityCanvas = document.getElementById("lineChart");
 
 Chart.defaults.global.defaultFontFamily = "Lato";
