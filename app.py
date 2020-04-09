@@ -55,14 +55,13 @@ dataframe['NewCases'] = dataframe['NewCases'].str.replace(',', '')
 dataframe['NewCases'] = (dataframe['NewCases'].str.strip('+').astype(float))
 dataframe['NewDeaths'] = dataframe['NewDeaths'].str.replace(',', '')
 dataframe['NewDeaths'] = (dataframe['NewDeaths'].str.strip('+').astype(float))
-dataframe.drop(['index'], axis=1)
+del dataframe["index"]
 dataframe.replace(to_replace ="S. Korea", value ="South Korea", inplace=True)
 Abbr = ['IN', 'US', 'CH', 'JP', 'SK','IT', 'TW']
 dataframe['Abbr'] = Abbr
 dataframe.fillna(0, inplace=True)
 dataframe.columns = ['Country', 'Total_Cases', 'New_Cases', 'Total_Deaths','New_Deaths', 'Total_Recovered', 'Active_Cases',
                      'Serious_Critical','Total_Cases_Per_1_M_PPL', 'Deaths_Per_1_M_PPL', 'Total_Tests', 'Total_Tests_Per_1_M_PPL', 'Abbr']
-
 #cols = ['Total_Deaths', 'New_Deaths', 'Total_Recovered']
 #dataframe[cols] = dataframe[cols]                  
 dataframe.to_csv('static/assets/data/file1.csv') 
@@ -277,7 +276,7 @@ def all_india_new_cases():
 def all_check():
     """Return csv."""
     column = final_df.iloc[:,0]
-    return jsonify(list(column))
+    return jsonify(list(dataframe.columns))
   
 @app.route('/check1')
 def all_check1():
