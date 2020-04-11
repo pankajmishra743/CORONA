@@ -279,12 +279,11 @@ def all_check():
     column = final_df.iloc[:,0]
     return jsonify(list(dataframe.columns))
   
-@app.route('/check1')
-def all_check1():
-    """Return csv."""
-    column1= final_df.iloc[:,1]
-    return jsonify(list(column1))
-  
+@app.route('/invsus')
+def INvsUS():
+    """Return Tableau graphs html page"""
+    return render_template("India VS USA-COVID.html")
+      
 @app.route('/check2')
 def all_check2():
     """Return csv."""
