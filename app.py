@@ -15,7 +15,7 @@ df2 = df.tail(1)
 final_df = pd.concat([df2, df1]).reset_index(drop=True)
 final_df.columns = ['SN', 'STATE_UT', 'TOTAL', 'DEATHS', 'RECOVERIES', 'ACTIVE_CASES'] 
 final_df['STATE_UT'] = (final_df['STATE_UT'].str.strip(' †'))
-final_df.at[0, 'STATE_UT'] = 'All India'
+#final_df.at[0, 'STATE_UT'] = 'All India'
 
 
 dd = pd.read_html('https://en.wikipedia.org/wiki/Template:2019%E2%80%9320_coronavirus_pandemic_data/India_medical_cases_summary')
