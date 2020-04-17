@@ -148,7 +148,7 @@ def sample_metadata(state):
 @app.route('/mdata/<state>')
 def sample_mdata(state):
     """Return the MetaData for a given State."""
-    return jsonify(meta_df[state])    
+    return jsonify(list(meta_df[state]))    
     
 @app.route('/dates')
 def sample_homedata():
