@@ -18,7 +18,7 @@ Total =  [pd.to_numeric(st_df.iloc[:, 2], errors='coerce').fillna(0).astype(int)
           pd.to_numeric(st_df.iloc[:, 4], errors='coerce').fillna(0).astype(int).sum(),
           pd.to_numeric(st_df.iloc[:, 5], errors='coerce').fillna(0).astype(int).sum()]
 new_row = pd.DataFrame({'SN':'0', 'STATE_UT':'All India', 'TOTAL':Total[0], 'DEATHS':Total[1], 'RECOVERIES':Total[2], 'ACTIVE_CASES':Total[3]}, index =[0])
-final_df = pd.concat([new_row, state_df]).reset_index(drop = True) 
+final_df = pd.concat([new_row, st_df]).reset_index(drop = True) 
 
 
 dd = pd.read_html('https://en.wikipedia.org/wiki/Template:2019%E2%80%9320_coronavirus_pandemic_data/India_medical_cases_summary')
