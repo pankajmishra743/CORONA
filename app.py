@@ -270,7 +270,15 @@ def all_checks3():
   
 @app.route('/xmeta/<state>')
 def all_check4(state):
-    return jsonify(list(meta_df[state]))
+    """Return the MetaData for a given State."""
+    final_list = [None] * 4
+    #a = meta_df[state]
+    
+    final_list[0] = final_df[final_df['STATE_UT']==state]['ACTIVE_CASES'].to_string(index=False)
+    final_list[1] = final_df[final_df['STATE_UT']==state]['DEATHS'].to_string(index=False)
+    final_list[2] = final_df[final_df['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
+    final_list[3] = final_df[final_df['STATE_UT']==state]['TOTAL'].to_string(index=False)
+    return jsonify(final_list)
     
 if __name__ == "__main__":
     app.run(debug=True)
