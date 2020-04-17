@@ -110,13 +110,6 @@ total_df.rename(columns = {'index':'Date'}, inplace = True)
 total_df['Date'] = pd.to_datetime(total_df['Date']) 
 total_df['Date'] = total_df['Date'].dt.strftime('%d/%m/%Y')
 
-
-meta_df = final_df.transpose()
-meta_df = meta_df.iloc[1:]
-headers = meta_df.iloc[0]
-meta_df  = pd.DataFrame(meta_df.values[1:], columns=headers)
-
-
 app = Flask(__name__)
 @app.route("/")
 def index():
@@ -149,11 +142,10 @@ def sample_metadata(state):
 def sample_mdata(state):
     """Return the MetaData for a given State."""
     final_list = [None] * 4
-    a = meta_df[state]
-    final_list[0] = a[3]
-    final_list[1] = a[1]
-    final_list[2] = a[2]
-    final_list[3] = a[0]
+    final_list[0] = final_df[final_df['STATE_UT']==state]['ACTIVE_CASES'].to_string(index=False)
+    final_list[1] = final_df[final_df['STATE_UT']==state]['DEATHS'].to_string(index=False)
+    final_list[2] = final_df[final_df['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
+    final_list[3] = final_df[final_df['STATE_UT']==state]['TOTAL'].to_string(index=False)
     return jsonify(final_list)  
     
 @app.route('/dates')
@@ -255,31 +247,7 @@ def all_check():
 def INvsUS():
     """Return Tableau graphs html page"""
     return render_template("India VS USA-COVID.html")
-      
-@app.route('/check2')
-def all_check2():
-    """Return csv."""
-    column2 = final_df.iloc[:,2]
-    return jsonify(list(column2))
-  
-@app.route('/checks3')
-def all_checks3():
-    """Return csv."""
-    column3= final_df.iloc[:,3]
-    return jsonify(list(column3))
-  
-@app.route('/xmeta/<state>')
-def all_check4(state):
-    """Return the MetaData for a given State."""
-    final_list = [None] * 4
-    #a = meta_df[state]
-    
-    final_list[0] = final_df[final_df['STATE_UT']==state]['ACTIVE_CASES'].to_string(index=False)
-    final_list[1] = final_df[final_df['STATE_UT']==state]['DEATHS'].to_string(index=False)
-    final_list[2] = final_df[final_df['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
-    final_list[3] = final_df[final_df['STATE_UT']==state]['TOTAL'].to_string(index=False)
-    return jsonify(final_list)
-    
+          
 if __name__ == "__main__":
     app.run(debug=True)
    
