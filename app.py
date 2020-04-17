@@ -13,7 +13,7 @@ df = d[0].iloc[:-2]
 df1 = df.iloc[:-1]
 df2 = df.tail(1)
 final_df = pd.concat([df2, df1]).reset_index(drop=True)
-final_df.columns = ['SN', 'STATE_UT', 'ACTIVE_CASES', 'DEATHS', 'RECOVERIES', 'TOTAL'] 
+final_df.columns = ['SN', 'STATE_UT', 'TOTAL', 'DEATHS', 'RECOVERIES', 'ACTIVE_CASES'] 
 final_df['STATE_UT'] = (final_df['STATE_UT'].str.strip(' †'))
 final_df.at[0, 'STATE_UT'] = 'All India'
 
