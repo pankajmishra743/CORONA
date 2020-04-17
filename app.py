@@ -149,7 +149,7 @@ def sample_metadata(state):
 def sample_mdata(state):
     """Return the MetaData for a given State."""
     final_list = [None] * 4
-    a = meta_df[state]
+    a = meta_df.state
     final_list[0] = a[3]
     final_list[1] = a[1]
     final_list[2] = a[2]
