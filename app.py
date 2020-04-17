@@ -154,7 +154,7 @@ def sample_mdata(state):
     final_list[1] = a[1]
     final_list[2] = a[2]
     final_list[3] = a[0]
-    return jsonify(final_list)  
+    return (final_list)  
     
 @app.route('/dates')
 def sample_homedata():
