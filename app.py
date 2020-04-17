@@ -311,7 +311,7 @@ def all_checks5(state):
     state_metadata['Active Cases'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
     state_metadata['Recoveries'] = ldf[ldf['STATE_UT']==state]['DEATHS'].to_string(index=False)
     state_metadata['Deaths'] = ldf[ldf['STATE_UT']==state]['TOTAL'].to_string(index=False)
-    state_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['STATE_UT'].to_string(index=False).replace("#", "").replace("*", "")
+    state_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['SN'].to_string(index=False).replace("#", "").replace("*", "")
         
     #AllIndia_metadata = {}
     #AllIndia_metadata['Active Cases'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
