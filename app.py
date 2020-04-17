@@ -11,7 +11,7 @@ import responses
 d = pd.read_html('https://en.wikipedia.org/wiki/Template:2019%E2%80%9320_coronavirus_pandemic_data/India_medical_cases')
 df = d[0].iloc[:-2]
 st_df = df.iloc[:-1]
-st_df.fillna(0, inplace=True)
+#st_df.fillna(0, inplace=True)
 st_df.columns = ['SN', 'STATE_UT', 'TOTAL', 'DEATHS', 'RECOVERIES', 'ACTIVE_CASES'] 
 Total =  [pd.to_numeric(st_df.iloc[:, 2], errors='coerce').fillna(0).astype(int).sum(),
           pd.to_numeric(st_df.iloc[:, 3], errors='coerce').fillna(0).astype(int).sum(),
@@ -138,54 +138,17 @@ def names():
 def sample_metadata(state):
     """Return the MetaData for a given State."""
     ldf = final_df
-    final = {}
-    
     state_metadata = {}
     state_metadata['Active Cases'] = ldf[ldf['STATE_UT']==state]['ACTIVE_CASES'].to_string(index=False)
     state_metadata['Recoveries'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
     state_metadata['Deaths'] = ldf[ldf['STATE_UT']==state]['DEATHS'].to_string(index=False)
     state_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['TOTAL'].to_string(index=False)
-        
-    AllIndia_metadata = {}
-    AllIndia_metadata['Deaths'] = ldf[ldf['STATE_UT']==state]['ACTIVE_CASES'].to_string(index=False)
-    AllIndia_metadata['Recoveries'] = ldf[ldf['STATE_UT']==state]['DEATHS'].to_string(index=False)
-    AllIndia_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False).replace("#", "").replace("*", "")
-    a = pd.to_numeric(AllIndia_metadata['Deaths'], errors='coerce').astype(int)
-    b = pd.to_numeric(AllIndia_metadata['Recoveries'], errors='coerce').astype(int)
-    c = pd.to_numeric(AllIndia_metadata['TOTAL'], errors='coerce').astype(int)
-    p = a+b
-    d = c-p
-    AllIndia_metadata['Active Cases'] = str(d)
-    
-    if(state == "All India"):
-      final = AllIndia_metadata
-    else:
-      final = state_metadata
-      
-    return jsonify(final)
+    return jsonify(state_metadata)
     
 @app.route('/mdata/<state>')
 def sample_mdata(state):
     """Return the MetaData for a given State."""
-    final_list = [None] * 4
-    a = meta_df[state]
-    if(state == "All India"):
-      final_list[3] = a[2].replace("#", "").replace("*", "")
-      final_list[2] = a[1]
-      final_list[1] = a[0]
-      
-      a = pd.to_numeric(final_list[1], errors='coerce').astype(int)
-      b = pd.to_numeric(final_list[2], errors='coerce').astype(int)
-      c = pd.to_numeric(final_list[3], errors='coerce').astype(int)
-      p = a+b
-      d = c-p
-      final_list[0] = str(d)
-    else:
-      final_list[0] = a[0]
-      final_list[1] = a[1]
-      final_list[2] = a[2]
-      final_list[3] = a[3]
-    return jsonify(final_list)    
+    return jsonify(meta_df[state])    
     
 @app.route('/dates')
 def sample_homedata():
