@@ -13,10 +13,10 @@ df = d[0].iloc[:-2]
 st_df = df.iloc[:-1]
 st_df.fillna(0, inplace=True)
 st_df.columns = ['SN', 'STATE_UT', 'TOTAL', 'DEATHS', 'RECOVERIES', 'ACTIVE_CASES'] 
-Total =  [pd.to_numeric(st_df.iloc[:, 2], errors='coerce').astype(int).sum(),
-          pd.to_numeric(st_df.iloc[:, 3], errors='coerce').astype(int).sum(),
-          pd.to_numeric(st_df.iloc[:, 4], errors='coerce').astype(int).sum(),
-          pd.to_numeric(st_df.iloc[:, 5], errors='coerce').astype(int).sum()]
+Total =  [pd.to_numeric(st_df.iloc[:, 2], errors='coerce').fillna(0).astype(int).sum(),
+          pd.to_numeric(st_df.iloc[:, 3], errors='coerce').fillna(0).astype(int).sum(),
+          pd.to_numeric(st_df.iloc[:, 4], errors='coerce').fillna(0).astype(int).sum(),
+          pd.to_numeric(st_df.iloc[:, 5], errors='coerce').fillna(0).astype(int).sum()]
 new_row = pd.DataFrame({'SN':'0', 'STATE_UT':'All India', 'TOTAL':Total[0], 'DEATHS':Total[1], 'RECOVERIES':Total[2], 'ACTIVE_CASES':Total[3]}, index =[0])
 final_df = pd.concat([new_row, state_df]).reset_index(drop = True) 
 
