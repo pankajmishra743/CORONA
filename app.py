@@ -10,12 +10,15 @@ import responses
 
 d = pd.read_html('https://en.wikipedia.org/wiki/Template:2019%E2%80%9320_coronavirus_pandemic_data/India_medical_cases')
 df = d[0].iloc[:-2]
-df1 = df.iloc[:-1]
-df2 = df.tail(1)
-final_df = pd.concat([df2, df1]).reset_index(drop=True)
-final_df.columns = ['SN', 'STATE_UT', 'TOTAL', 'DEATHS', 'RECOVERIES', 'ACTIVE_CASES'] 
-final_df['STATE_UT'] = (final_df['STATE_UT'].str.strip(' †'))
-#final_df.at[0, 'STATE_UT'] = 'All India'
+state_df = df.iloc[:-1]
+state_df.columns = ['SN', 'STATE_UT', 'TOTAL', 'DEATHS', 'RECOVERIES', 'ACTIVE_CASES'] 
+Total =  [pd.to_numeric(state_df.iloc[:, 2], errors='coerce').astype(int).sum(),
+          pd.to_numeric(state_df.iloc[:, 3], errors='coerce').astype(int).sum(),
+          pd.to_numeric(state_df.iloc[:, 4], errors='coerce').astype(int).sum(),
+          pd.to_numeric(state_df.iloc[:, 5], errors='coerce').astype(int).sum()]
+new_row = pd.DataFrame({'SN':'0', 'STATE_UT':'All India', 'TOTAL':Total[0], 'DEATHS':Total[1], 'RECOVERIES':Total[2], 'ACTIVE_CASES':Total[3]}, index =[0])
+final_df = pd.concat([new_row, state_df]).reset_index(drop = True) 
+final_df
 
 
 dd = pd.read_html('https://en.wikipedia.org/wiki/Template:2019%E2%80%9320_coronavirus_pandemic_data/India_medical_cases_summary')
@@ -296,43 +299,19 @@ def all_checks3():
     column3= final_df.iloc[:,3]
     return jsonify(list(column3))
   
-@app.route('/check4')
-def all_check4():
-    """Return csv."""
-    column4 = final_df.iloc[:,4]
-    return jsonify(list(column4))
-  
-@app.route('/xdata/<state>')
-def all_checks5(state):
+@app.route('/xmeta/<state>')
+def all_check4(state):
     ldf = final_df
     final = {}
     
     state_metadata = {}
-    state_metadata['Active Cases'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
-    state_metadata['Recoveries'] = ldf[ldf['STATE_UT']==state]['DEATHS'].to_string(index=False)
-    state_metadata['Deaths'] = ldf[ldf['STATE_UT']==state]['TOTAL'].to_string(index=False)
-    state_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['SN'].to_string(index=False).replace("#", "").replace("*", "")
-        
-    #AllIndia_metadata = {}
-    #AllIndia_metadata['Active Cases'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
-    #AllIndia_metadata['Deaths'] = ldf[ldf['STATE_UT']==state]['TOTAL'].to_string(index=False)
-    #AllIndia_metadata['Recoveries'] = ldf[ldf['STATE_UT']==state]['DEATHS'].to_string(index=False)
-    #AllIndia_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['STATE_UT'].to_string(index=False).replace("#", "").replace("*", "")
-    #a = pd.to_numeric(AllIndia_metadata['Deaths'], errors='coerce').astype(int)
-    #b = pd.to_numeric(AllIndia_metadata['Recoveries'], errors='coerce').astype(int)
-    #c = pd.to_numeric(AllIndia_metadata['TOTAL'], errors='coerce').astype(int)
-    #p = a+b
-    #d = c-p
-    #AllIndia_metadata['Active Cases'] = str(d)
-   # 
-   # if(state == "All India"):
-   #   final = AllIndia_metadata
-   # else:
-   #   final = state_metadata
-   #   
+    state_metadata['Active Cases'] = ldf[ldf['STATE_UT']==state]['ACTIVE_CASES'].to_string(index=False)
+    state_metadata['Recoveries'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
+    state_metadata['Deaths'] = ldf[ldf['STATE_UT']==state]['DEATHS'].to_string(index=False)
+    state_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['TOTAL'].to_string(index=False)
+    
     return jsonify(state_metadata)
-
-  
+    
 if __name__ == "__main__":
     app.run(debug=True)
    
