@@ -148,7 +148,13 @@ def sample_metadata(state):
 @app.route('/mdata/<state>')
 def sample_mdata(state):
     """Return the MetaData for a given State."""
-    return jsonify(list(meta_df[state]))    
+    final_list = [None] * 4
+    a = meta_df[state]
+    final_list[0] = a[3]
+    final_list[1] = a[1]
+    final_list[2] = a[2]
+    final_list[3] = a[0]
+    return jsonify(final_list)  
     
 @app.route('/dates')
 def sample_homedata():
@@ -264,16 +270,7 @@ def all_checks3():
   
 @app.route('/xmeta/<state>')
 def all_check4(state):
-    ldf = final_df
-    final = {}
-    
-    state_metadata = {}
-    state_metadata['Active Cases'] = ldf[ldf['STATE_UT']==state]['ACTIVE_CASES'].to_string(index=False)
-    state_metadata['Recoveries'] = ldf[ldf['STATE_UT']==state]['RECOVERIES'].to_string(index=False)
-    state_metadata['Deaths'] = ldf[ldf['STATE_UT']==state]['DEATHS'].to_string(index=False)
-    state_metadata['TOTAL'] = ldf[ldf['STATE_UT']==state]['TOTAL'].to_string(index=False)
-    
-    return jsonify(state_metadata)
+    return jsonify(list(meta_df[state]))
     
 if __name__ == "__main__":
     app.run(debug=True)
