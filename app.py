@@ -31,9 +31,6 @@ state_df = state_df.iloc[:, :-4]
 state_df.insert(8, "Dadra and Nagar Haveli and Daman and Diu", 0)
 state_df.insert(19, "Lakshadweep", 0)
 state_df.insert(30, "Sikkim", 0)
-pd.to_numeric(state_df['Dadra and Nagar Haveli and Daman and Diu'], errors='coerce').astype(int)
-pd.to_numeric(state_df['Lakshadweep'], errors='coerce').astype(int)
-pd.to_numeric(state_df['Sikkim'], errors='coerce').astype(int)
 
 ColumnName = final_df['STATE_UT'].tolist()
 ColumnName.append('New')
