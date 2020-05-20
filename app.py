@@ -9,7 +9,7 @@ import requests
 import responses
 
 d = pd.read_html('https://en.wikipedia.org/wiki/Template:2019%E2%80%9320_coronavirus_pandemic_data/India_medical_cases')
-df = d[0].iloc[:-2]
+df = d[0].iloc[3:-2]
 st_df = df.iloc[:-1]
 #st_df.fillna(0, inplace=True)
 st_df.columns = ['SN', 'STATE_UT', 'TOTAL', 'DEATHS', 'RECOVERIES', 'ACTIVE_CASES'] 
