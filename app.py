@@ -8,7 +8,7 @@ import io
 import requests
 import responses
 
-d = pd.read_html('https://https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data/India_medical_cases')
+d = pd.read_html('https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data/India_medical_cases')
 st_df = d[0].iloc[3:-3]
 #st_df = df.iloc[:-1]
 #st_df.fillna(0, inplace=True)
