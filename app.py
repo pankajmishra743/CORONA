@@ -25,8 +25,8 @@ new_row = pd.DataFrame({'SN':'0', 'STATE_UT':'All India', 'TOTAL':Total[0], 'DEA
 final_df = pd.concat([new_row, st_df]).reset_index(drop = True) 
 
 
-dd = pd.read_html('https://en.wikipedia.org/wiki/Template:2019%E2%80%9320_coronavirus_pandemic_data/India_medical_cases_summary')
-state_df = dd[0].iloc[:-4]
+dd = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
+state_df = dd[7].iloc[:-4]
 state_df = state_df.replace(to_replace ='\(.*\)', value = '', regex = True) 
 state_df = state_df.replace(to_replace ='\[.*\]', value = '', regex = True)
 state_df.fillna(0, inplace=True)
