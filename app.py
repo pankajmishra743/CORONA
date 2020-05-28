@@ -16,7 +16,8 @@ st_df = d[0].iloc[3:-3]
 st_df = st_df.replace(to_replace ='\(.*\)', value = '', regex = True) 
 st_df = st_df.replace(to_replace ='\[.*\]', value = '', regex = True)
 
-st_df.columns = ['SN', 'STATE_UT', 'TOTAL', 'DEATHS', 'RECOVERIES', 'ACTIVE_CASES'] 
+#st_df.columns = ['SN', 'STATE_UT', 'TOTAL', 'DEATHS', 'RECOVERIES', 'ACTIVE_CASES'] 
+st_df.rename(columns={'0': 'SN', '1': 'STATE_UT', '2': 'TOTAL', '3': 'DEATHS', '4': 'RECOVERIES', '5': 'ACTIVE_CASES'})
 Total =  [pd.to_numeric(st_df.iloc[:, 2], errors='coerce').fillna(0).astype(int).sum(),
           pd.to_numeric(st_df.iloc[:, 3], errors='coerce').fillna(0).astype(int).sum(),
           pd.to_numeric(st_df.iloc[:, 4], errors='coerce').fillna(0).astype(int).sum(),
