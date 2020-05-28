@@ -16,8 +16,7 @@ st_df = d[0].iloc[3:-3]
 st_df = st_df.replace(to_replace ='\(.*\)', value = '', regex = True) 
 st_df = st_df.replace(to_replace ='\[.*\]', value = '', regex = True)
 
-#st_df.columns = ['SN', 'STATE_UT', 'TOTAL', 'DEATHS', 'RECOVERIES', 'ACTIVE_CASES'] 
-st_df.rename(columns={'0': 'SN', '1': 'STATE_UT', '2': 'TOTAL', '3': 'DEATHS', '4': 'RECOVERIES', '5': 'ACTIVE_CASES'})
+st_df.columns = ['SN', 'STATE_UT', 'TOTAL', 'DEATHS', 'RECOVERIES', 'ACTIVE_CASES'] 
 Total =  [pd.to_numeric(st_df.iloc[:, 2], errors='coerce').fillna(0).astype(int).sum(),
           pd.to_numeric(st_df.iloc[:, 3], errors='coerce').fillna(0).astype(int).sum(),
           pd.to_numeric(st_df.iloc[:, 4], errors='coerce').fillna(0).astype(int).sum(),
@@ -41,7 +40,7 @@ ColumnName = final_df['STATE_UT'].tolist()
 ColumnName.append('New')
 ColumnName.append(ColumnName.pop(ColumnName.index('All India')))
 ColumnName.insert(0, "Date")
-# ColumnName = ColumnName[2:]
+ColumnName = ColumnName[2:]
 state_df.columns = ColumnName
 # state_df.rename(columns = {'Total':'All India'}, inplace = True)
 # state_df.rename(columns = {'Date (2020)':'Date'}, inplace = True)
