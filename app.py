@@ -40,6 +40,7 @@ ColumnName = final_df['STATE_UT'].tolist()
 ColumnName.append('New')
 ColumnName.append(ColumnName.pop(ColumnName.index('All India')))
 ColumnName.insert(0, "Date")
+ColumnName = ColumnName[2:]
 state_df.columns = ColumnName
 
 # for world analysis
