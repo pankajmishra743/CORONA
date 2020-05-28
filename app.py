@@ -72,7 +72,7 @@ Abbr = ['IN', 'US', 'CH', 'JP', 'SK','IT', 'TW']
 dataframe['Abbr'] = Abbr
 dataframe.fillna(0, inplace=True)
 dataframe.columns = ['Country', 'Total_Cases', 'New_Cases', 'Total_Deaths','New_Deaths', 'Total_Recovered', 'Active_Cases',
-                     'Serious_Critical','Total_Cases_Per_1_M_PPL', 'Deaths_Per_1_M_PPL', 'Total_Tests', 'Total_Tests_Per_1_M_PPL', 'Abbr']
+                     'Serious_Critical','Total_Cases_Per_1_M_PPL', 'Deaths_Per_1_M_PPL', 'Total_Tests', 'Total_Tests_Per_1_M_PPL', 'Population', 'Abbr']
 #cols = ['Total_Deaths', 'New_Deaths', 'Total_Recovered']
 #dataframe[cols] = dataframe[cols]                  
 dataframe.to_csv('static/assets/data/file1.csv') 
