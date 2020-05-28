@@ -68,14 +68,13 @@ dataframe['NewDeaths'] = (dataframe['NewDeaths'].str.strip('+').astype(float))
 #cols = [0,1]
 #dataframe.drop(dataframe.columns[cols],axis=1,inplace=True)
 dataframe= dataframe[dataframe.columns[-13:]]
+dataframe = dataframe.iloc[:, :-1]
 dataframe.replace(to_replace ="S. Korea", value ="South Korea", inplace=True)
 Abbr = ['IN', 'US', 'CH', 'JP', 'SK','IT', 'TW']
 dataframe['Abbr'] = Abbr
 dataframe.fillna(0, inplace=True)
 dataframe.columns = ['Country', 'Total_Cases', 'New_Cases', 'Total_Deaths','New_Deaths', 'Total_Recovered', 'Active_Cases',
-                     'Serious_Critical','Total_Cases_Per_1_M_PPL', 'Deaths_Per_1_M_PPL', 'Total_Tests', 'Total_Tests_Per_1_M_PPL', 'Population', 'Abbr']
-#cols = ['Total_Deaths', 'New_Deaths', 'Total_Recovered']
-#dataframe[cols] = dataframe[cols]                  
+                     'Serious_Critical','Total_Cases_Per_1_M_PPL', 'Deaths_Per_1_M_PPL', 'Total_Tests', 'Total_Tests_Per_1_M_PPL', 'Abbr']                
 dataframe.to_csv('static/assets/data/file1.csv') 
  
 
