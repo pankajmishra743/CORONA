@@ -12,6 +12,10 @@ d = pd.read_html('https://en.wikipedia.org/wiki/Template:2019%E2%80%9320_coronav
 st_df = d[0].iloc[3:-3]
 #st_df = df.iloc[:-1]
 #st_df.fillna(0, inplace=True)
+
+st_df = st_df.replace(to_replace ='\(.*\)', value = '', regex = True) 
+st_df = st_df.replace(to_replace ='\[.*\]', value = '', regex = True)
+
 st_df.columns = ['SN', 'STATE_UT', 'TOTAL', 'DEATHS', 'RECOVERIES', 'ACTIVE_CASES'] 
 Total =  [pd.to_numeric(st_df.iloc[:, 2], errors='coerce').fillna(0).astype(int).sum(),
           pd.to_numeric(st_df.iloc[:, 3], errors='coerce').fillna(0).astype(int).sum(),
