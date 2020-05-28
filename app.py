@@ -66,7 +66,7 @@ dataframe['NewCases'] = (dataframe['NewCases'].str.strip('+').astype(float))
 dataframe['NewDeaths'] = dataframe['NewDeaths'].str.replace(',', '')
 dataframe['NewDeaths'] = (dataframe['NewDeaths'].str.strip('+').astype(float))
 del dataframe["index"]
-del dataframe["Continent"]
+del dataframe["#"]
 dataframe.replace(to_replace ="S. Korea", value ="South Korea", inplace=True)
 Abbr = ['IN', 'US', 'CH', 'JP', 'SK','IT', 'TW']
 dataframe['Abbr'] = Abbr
