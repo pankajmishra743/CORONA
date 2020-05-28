@@ -248,7 +248,7 @@ def all_india_new_cases():
 def all_check():
     """Return csv."""
     column = final_df.iloc[:,0]
-    return jsonify(list(dataframe.columns))
+    return jsonify(dataframe[dataframe['Country']=="India"]['Total_Cases'])
   
 @app.route('/invsus')
 def INvsUS():
