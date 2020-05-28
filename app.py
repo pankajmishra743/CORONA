@@ -193,6 +193,7 @@ def world_country_metadata(country):
     country_metadata['Deaths/1M Pop'] = dataframe[dataframe['Country']==country]['Deaths_Per_1_M_PPL'].to_string(index=False)
     country_metadata['Total Tests'] = dataframe[dataframe['Country']==country]['Total_Tests'].to_string(index=False)
     country_metadata['Total Tests/1M Pop'] = dataframe[dataframe['Country']==country]['Total_Tests_Per_1_M_PPL'].to_string(index=False)
+    country_metadata['Population'] = dataframe[dataframe['Country']==country]['Population'].to_string(index=False)
     return jsonify(country_metadata)  
 
 @app.route('/<country>/conf')
