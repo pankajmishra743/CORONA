@@ -9,7 +9,7 @@ import requests
 import responses
 
 d = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
-st_df = d[6].iloc[:-3]
+st_df = d[8].iloc[:-3]
 #st_df = df.iloc[:-1]
 #st_df.fillna(0, inplace=True)
 
@@ -26,7 +26,7 @@ final_df = pd.concat([new_row, st_df]).reset_index(drop = True)
 
 
 dd = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
-state_df = dd[7].iloc[:-4]
+state_df = dd[9].iloc[:-4]
 state_df = state_df.replace(to_replace ='\(.*\)', value = '', regex = True) 
 state_df = state_df.replace(to_replace ='\[.*\]', value = '', regex = True)
 state_df.fillna(0, inplace=True)
