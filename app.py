@@ -46,35 +46,22 @@ state_df.columns = ColumnName
 # for world analysis
 
 url = 'https://www.worldometers.info/coronavirus'
-r = requests.get(url)
-dm = pd.read_html(r.text)
-l_df = dm[1]
-l_df.rename(columns = {'Country,Other':'Country'}, inplace = True)
-df_US = l_df.loc[(l_df['Country'] == 'USA')]
-df_India = l_df.loc[(l_df['Country'] == 'India')]
-df_China = l_df.loc[(l_df['Country'] == 'China')]
-df_Japan = l_df.loc[(l_df['Country'] == 'Japan')]
-df_South_Korea = l_df.loc[(l_df['Country'] == 'S. Korea')]
-df_Italy = l_df.loc[(l_df['Country'] == 'Italy')]
-df_Taiwan = l_df.loc[(l_df['Country'] == 'Taiwan')]
-frames = [df_India, df_US, df_China, df_Japan, df_South_Korea, df_Italy, df_Taiwan]
-dataframe = pd.concat(frames)
-dataframe.fillna(0, inplace=True)
-dataframe.reset_index(inplace=True)
-dataframe['NewCases'] = dataframe['NewCases'].str.replace(',', '')
-dataframe['NewCases'] = (dataframe['NewCases'].str.strip('+').astype(float))
-dataframe['NewDeaths'] = dataframe['NewDeaths'].str.replace(',', '')
-dataframe['NewDeaths'] = (dataframe['NewDeaths'].str.strip('+').astype(float))
-#cols = [0,1]
-#dataframe.drop(dataframe.columns[cols],axis=1,inplace=True)
-dataframe= dataframe[dataframe.columns[-13:]]
-dataframe = dataframe.iloc[:, :-1]
-dataframe.replace(to_replace ="S. Korea", value ="South Korea", inplace=True)
-Abbr = ['IN', 'US', 'CH', 'JP', 'SK','IT', 'TW']
-dataframe['Abbr'] = Abbr
-dataframe.fillna(0, inplace=True)
+page = requests.get(url)
+soup = BeautifulSoup(page.content, 'html.parser')
+tables = soup.find_all("table")
+table = tables[1]
+tab_data = [[cell.text for cell in row.find_all(["th","td"])]
+                        for row in table.find_all("tr")]
+dataframe = pd.DataFrame(tab_data)
+dataframe.drop(dataframe.columns[[0,7,14,15,16,17,18]], axis = 1, inplace=True)
+# dataframe.columns = df.iloc[0]
 dataframe.columns = ['Country', 'Total_Cases', 'New_Cases', 'Total_Deaths','New_Deaths', 'Total_Recovered', 'Active_Cases',
-                     'Serious_Critical','Total_Cases_Per_1_M_PPL', 'Deaths_Per_1_M_PPL', 'Total_Tests', 'Total_Tests_Per_1_M_PPL', 'Abbr']                
+                     'Serious_Critical','Total_Cases_Per_1_M_PPL', 'Deaths_Per_1_M_PPL', 'Total_Tests', 'Total_Tests_Per_1_M_PPL']
+dataframe = dataframe.loc[dataframe['Country'].isin(['India','USA','China','Japan','S. Korea','Italy','Taiwan'])]
+dataframe.replace(',','', regex=True, inplace=True)
+dataframe.replace(to_replace ="S. Korea", value ="South Korea", inplace=True)
+dataframe.fillna(0, inplace=True)
+dataframe.reset_index(inplace = True, drop = True)                
 dataframe.to_csv('static/assets/data/file1.csv') 
  
 
