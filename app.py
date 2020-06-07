@@ -63,7 +63,9 @@ dataframe.replace(',','', regex=True, inplace=True)
 dataframe.replace(to_replace ="S. Korea", value ="South Korea", inplace=True)
 dataframe.fillna(0, inplace=True)
 dataframe = dataframe.convert_objects(convert_numeric=True).fillna(0)
-dataframe.reset_index(inplace = True, drop = True)                
+dataframe.reset_index(inplace = True, drop = True)
+Abbr = ['CH', 'US', 'IN', 'IT', 'JP','SK', 'TW']
+dataframe['Abbr'] = Abbr
 dataframe.to_csv('static/assets/data/file1.csv') 
  
 
