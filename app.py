@@ -1,6 +1,7 @@
 
 from flask import Flask, jsonify, render_template, request, flash, redirect
 from pandasql import sqldf
+from bs4 import BeautifulSoup
 
 import pandas as pd
 import numpy as np
