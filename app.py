@@ -8,15 +8,18 @@ import numpy as np
 import io
 import requests
 import responses
-
-d = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
-st_df = d[8].iloc[:-3]
-#st_df = df.iloc[:-1]
-#st_df.fillna(0, inplace=True)
-
+# State Wise Case Data
+url_case = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India'
+page_case = requests.get(url_case)
+soup_case = BeautifulSoup(page_case.content, 'html.parser')
+table_scrapped_case = soup_case.find('table',{'class':'wikitable plainrowheaders sortable mw-collapsible'})
+tab_data_case = [[cell.text for cell in row.find_all(["th","td"])]
+                        for row in table_scrapped_case.find_all("tr")]
+st_df = pd.DataFrame(tab_data_case)
+st_df = st_df.iloc[2:-3]
+st_df.replace(r'\n','', regex=True, inplace=True)
 st_df = st_df.replace(to_replace ='\(.*\)', value = '', regex = True) 
 st_df = st_df.replace(to_replace ='\[.*\]', value = '', regex = True)
-
 st_df.columns = ['SN', 'STATE_UT', 'TOTAL', 'DEATHS', 'RECOVERIES', 'ACTIVE_CASES'] 
 Total =  [pd.to_numeric(st_df.iloc[:, 2], errors='coerce').fillna(0).astype(int).sum(),
           pd.to_numeric(st_df.iloc[:, 3], errors='coerce').fillna(0).astype(int).sum(),
@@ -25,13 +28,20 @@ Total =  [pd.to_numeric(st_df.iloc[:, 2], errors='coerce').fillna(0).astype(int)
 new_row = pd.DataFrame({'SN':'0', 'STATE_UT':'All India', 'TOTAL':Total[0], 'DEATHS':Total[1], 'RECOVERIES':Total[2], 'ACTIVE_CASES':Total[3]}, index =[0])
 final_df = pd.concat([new_row, st_df]).reset_index(drop = True) 
 
-
-dd = pd.read_html('https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India')
-state_df = dd[9].iloc[:-4]
+# Date wise State Data
+url_dateWise = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India'
+page_dateWise = requests.get(url_dateWise)
+soup_dateWise = BeautifulSoup(page_dateWise.content, 'html.parser')
+table_scrapped_dateWise = soup.find('table',{'class':'wikitable mw-collapsible mw-collapsed'})
+tab_data_dateWise = [[cell.text for cell in row.find_all(["th","td"])]
+                        for row in table_scrapped_dateWise.find_all("tr")]
+state_df = pd.DataFrame(tab_data_dateWise)
+state_df.replace(r'\n','', regex=True, inplace=True)
 state_df = state_df.replace(to_replace ='\(.*\)', value = '', regex = True) 
 state_df = state_df.replace(to_replace ='\[.*\]', value = '', regex = True)
 state_df.fillna(0, inplace=True)
 state_df = state_df.iloc[:, :-4]
+state_df = state_df.iloc[2:-4]
 
 cols = [38]
 state_df.drop(state_df.columns[cols],axis=1,inplace=True)
@@ -41,7 +51,7 @@ ColumnName = final_df['STATE_UT'].tolist()
 ColumnName.append('New')
 ColumnName.append(ColumnName.pop(ColumnName.index('All India')))
 ColumnName.insert(0, "Date")
-ColumnName = ColumnName[2:]
+# ColumnName = ColumnName[2:]
 state_df.columns = ColumnName
 
 # for world analysis
