@@ -32,7 +32,7 @@ final_df = pd.concat([new_row, st_df]).reset_index(drop = True)
 url_dateWise = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India'
 page_dateWise = requests.get(url_dateWise)
 soup_dateWise = BeautifulSoup(page_dateWise.content, 'html.parser')
-table_scrapped_dateWise = soup.find('table',{'class':'wikitable mw-collapsible mw-collapsed'})
+table_scrapped_dateWise = soup_dateWise.find('table',{'class':'wikitable mw-collapsible mw-collapsed'})
 tab_data_dateWise = [[cell.text for cell in row.find_all(["th","td"])]
                         for row in table_scrapped_dateWise.find_all("tr")]
 state_df = pd.DataFrame(tab_data_dateWise)
