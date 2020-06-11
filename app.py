@@ -16,7 +16,7 @@ table_scrapped_case = soup_case.find('table',{'class':'wikitable plainrowheaders
 tab_data_case = [[cell.text for cell in row.find_all(["th","td"])]
                         for row in table_scrapped_case.find_all("tr")]
 st_df = pd.DataFrame(tab_data_case)
-st_df = st_df.iloc[2:-3]
+st_df = st_df.iloc[2:-4]
 st_df.replace(r'\n','', regex=True, inplace=True)
 st_df = st_df.replace(to_replace ='\(.*\)', value = '', regex = True) 
 st_df = st_df.replace(to_replace ='\[.*\]', value = '', regex = True)
@@ -43,7 +43,7 @@ state_df.fillna(0, inplace=True)
 state_df = state_df.iloc[:, :-4]
 state_df = state_df.iloc[2:-4]
 
-cols = [38]
+cols = [36]
 state_df.drop(state_df.columns[cols],axis=1,inplace=True)
 state_df.insert(19, "Lakshadweep", '0')
 
