@@ -29,10 +29,10 @@ new_row = pd.DataFrame({'SN':'0', 'STATE_UT':'All India', 'TOTAL':Total[0], 'DEA
 final_df = pd.concat([new_row, st_df]).reset_index(drop = True) 
 
 # Date wise State Data
-url_dateWise = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India'
+url_dateWise = 'https://en.wikipedia.org/wiki/COVID-19_pandemic_in_India/Statistics'
 page_dateWise = requests.get(url_dateWise)
 soup_dateWise = BeautifulSoup(page_dateWise.content, 'html.parser')
-table_scrapped_dateWise = soup_dateWise.find('table',{'class':'wikitable mw-collapsible mw-collapsed'})
+table_scrapped_dateWise = soup_dateWise.find('table',{'class':'wikitable mw-collapsible mw-collapsed mw-made-collapsible'})
 tab_data_dateWise = [[cell.text for cell in row.find_all(["th","td"])]
                         for row in table_scrapped_dateWise.find_all("tr")]
 state_df = pd.DataFrame(tab_data_dateWise)
