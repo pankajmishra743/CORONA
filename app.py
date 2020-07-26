@@ -16,7 +16,7 @@ table_scrapped_case = soup_case.find('table',{'class':'table table-striped'})
 tab_data_case = [[cell.text for cell in row.find_all(["th","td"])]
                         for row in table_scrapped_case.find_all("tr")]
 st_df = pd.DataFrame(tab_data_case)
-st_df = st_df.iloc[1:-5]
+st_df = st_df.iloc[1:-6]
 st_df.replace(r'\n','', regex=True, inplace=True)
 st_df = st_df.replace(to_replace ='\(.*\)', value = '', regex = True) 
 st_df = st_df.replace(to_replace ='\[.*\]', value = '', regex = True)
