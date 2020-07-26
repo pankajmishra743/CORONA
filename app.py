@@ -19,7 +19,6 @@ st_df = pd.DataFrame(tab_data_case)
 st_df = st_df.iloc[1:-6]
 st_df.replace(r'\n','', regex=True, inplace=True)
 st_df = st_df.replace(to_replace ='\(.*\)', value = '', regex = True) 
-st_df = st_df.replace(to_replace ='*', value = '', regex = True)
 st_df.columns = ['SN','STATE_UT','ACTIVE_CASES','RECOVERIES', 'DEATHS','TOTAL'] 
 Total =  [pd.to_numeric(st_df.iloc[:, 2], errors='coerce').fillna(0).astype(int).sum(),
           pd.to_numeric(st_df.iloc[:, 3], errors='coerce').fillna(0).astype(int).sum(),
@@ -39,7 +38,6 @@ tab_data_dateWise = [[cell.text for cell in row.find_all(["th","td"])]
 state_df = pd.DataFrame(tab_data_dateWise)
 state_df.replace(r'\n','', regex=True, inplace=True)
 state_df = state_df.replace(to_replace ='\(.*\)', value = '', regex = True) 
-state_df = state_df.replace(to_replace ='\[.*\]', value = '', regex = True)
 state_df.fillna(0, inplace=True)
 state_df = state_df.iloc[:, :-4]
 state_df = state_df.iloc[2:-4]
