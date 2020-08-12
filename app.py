@@ -46,6 +46,7 @@ state_df = state_df.iloc[2:-4]
 
 cols = [36]
 state_df.drop(state_df.columns[cols],axis=1,inplace=True)
+state_df.insert(19, "Lakshadweep", '0')
 ColumnName = final_df['STATE_UT'].tolist()
 ColumnName.append('New')
 ColumnName.append(ColumnName.pop(ColumnName.index('All India')))
