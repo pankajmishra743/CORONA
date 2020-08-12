@@ -68,7 +68,7 @@ dataframe.drop(dataframe.columns[[0,7,14,15,16,17,18]], axis = 1, inplace=True)
 dataframe.columns = ['Country', 'Total_Cases', 'New_Cases', 'Total_Deaths','New_Deaths', 'Total_Recovered', 'Active_Cases',
                      'Serious_Critical','Total_Cases_Per_1_M_PPL', 'Deaths_Per_1_M_PPL', 'Total_Tests', 'Total_Tests_Per_1_M_PPL']
 dataframe = dataframe.loc[dataframe['Country'].isin(['India','USA','China','Japan','S. Korea','Italy','Taiwan'])]
-dataframe.replace(',','', regex=True, inplace=True)
+dataframe.replace(to_replace =',', value = '', regex = True, inplace=True)
 dataframe.replace(to_replace ="S. Korea", value ="South Korea", inplace=True)
 dataframe.fillna(0, inplace=True)
 dataframe = dataframe.convert_objects(convert_numeric=True).fillna(0)
