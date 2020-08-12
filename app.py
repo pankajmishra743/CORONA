@@ -9,23 +9,24 @@ import io
 import requests
 import responses
 # State Wise Case Data
-url_case = 'https://www.mohfw.gov.in/'
+url_case = 'https://en.wikipedia.org/wiki/Template:COVID-19_pandemic_data/India_medical_cases_by_state_and_union_territory'
 page_case = requests.get(url_case)
 soup_case = BeautifulSoup(page_case.content, 'html.parser')
-table_scrapped_case = soup_case.find('table',{'class':'table table-striped'})
+table_scrapped_case = soup_case.find('table',{'class':'wikitable plainrowheaders sortable'})
 tab_data_case = [[cell.text for cell in row.find_all(["th","td"])]
                         for row in table_scrapped_case.find_all("tr")]
 st_df = pd.DataFrame(tab_data_case)
-st_df = st_df.iloc[1:-5]
+st_df = st_df.iloc[3:-2]
 st_df.replace(r'\n','', regex=True, inplace=True)
 st_df = st_df.replace(to_replace ='\(.*\)', value = '', regex = True) 
-st_df.columns = ['SN','STATE_UT','ACTIVE_CASES','RECOVERIES', 'DEATHS','TOTAL'] 
-Total =  [pd.to_numeric(st_df.iloc[:, 2], errors='coerce').fillna(0).astype(int).sum(),
+st_df = st_df.replace(to_replace =',', value = '', regex = True)
+st_df.columns = ['STATE_UT','TOTAL', 'DEATHS','RECOVERIES', 'ACTIVE_CASES'] 
+Total =  [pd.to_numeric(st_df.iloc[:, 1], errors='coerce').fillna(0).astype(int).sum(),
+          pd.to_numeric(st_df.iloc[:, 2], errors='coerce').fillna(0).astype(int).sum(),
           pd.to_numeric(st_df.iloc[:, 3], errors='coerce').fillna(0).astype(int).sum(),
-          pd.to_numeric(st_df.iloc[:, 4], errors='coerce').fillna(0).astype(int).sum(),
-          pd.to_numeric(st_df.iloc[:, 5], errors='coerce').fillna(0).astype(int).sum()]
-new_row = pd.DataFrame({'SN':'0', 'STATE_UT':'All India', 'ACTIVE_CASES':Total[0], 'RECOVERIES':Total[1], 'DEATHS':Total[2], 'TOTAL':Total[3]}, index =[0])
-final_df = pd.concat([new_row, st_df]).reset_index(drop = True) 
+          pd.to_numeric(st_df.iloc[:, 4], errors='coerce').fillna(0).astype(int).sum()]
+new_row = pd.DataFrame({'STATE_UT':'All India', 'TOTAL':Total[0], 'DEATHS':Total[1], 'RECOVERIES':Total[2], 'ACTIVE_CASES':Total[3]}, index =[0])
+final_df = pd.concat([new_row, st_df]).reset_index(drop = True)
 
 # Date wise State Data
 # wikitable mw-collapsible mw-collapsed
