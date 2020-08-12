@@ -19,6 +19,7 @@ st_df = pd.DataFrame(tab_data_case)
 st_df = st_df.iloc[3:-2]
 st_df.replace(r'\n','', regex=True, inplace=True)
 st_df = st_df.replace(to_replace ='\(.*\)', value = '', regex = True) 
+st_df = st_df.replace(to_replace ='\[.*\]', value = '', regex = True)
 st_df = st_df.replace(to_replace =',', value = '', regex = True)
 st_df.columns = ['STATE_UT','TOTAL', 'DEATHS','RECOVERIES', 'ACTIVE_CASES'] 
 Total =  [pd.to_numeric(st_df.iloc[:, 1], errors='coerce').fillna(0).astype(int).sum(),
